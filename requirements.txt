@@ -1,0 +1,19 @@
+alembic==0.8.6
+argh==0.26.1
+astroid==1.4.5
+colorama==0.3.7
+lazy-object-proxy==1.2.2
+Mako==1.0.4
+MarkupSafe==0.23
+pathtools==0.1.2
+-e git+https://github.com/dozymoe/PyBuildTool@20997efb8fbcea24ede37f79556d2270754b72dd#egg=PyBuildTool
+pylint==1.5.5
+python-editor==1.0
+PyYAML==3.11
+six==1.10.0
+SQLAlchemy==1.0.12
+Twisted==16.1.1
+txpostgres==1.6.0
+watchdog==0.8.3
+wrapt==1.10.8
+zope.interface==4.1.3

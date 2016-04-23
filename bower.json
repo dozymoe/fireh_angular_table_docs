@@ -1,0 +1,25 @@
+{
+  "name": "fireh_angular_table_docs",
+  "authors": [
+    "Fahri Reza <dozymoe@gmail.com>"
+  ],
+  "description": "FirehAngularTable Documentation Site",
+  "main": "public/scripts/app.js",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "angular_table.fireh.biz.id",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.5",
+    "fireh_angular_table": "dozymoe/fireh_angular_table#^0.0.2",
+    "bootstrap": "^3.3.6",
+    "jquery": "^2.2.3"
+  }
+}

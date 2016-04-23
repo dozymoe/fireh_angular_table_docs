@@ -1,0 +1,18 @@
+server:
+    options:
+        stylus_plugins:
+            - autoprefixer-stylus
+
+    html:
+        cp:
+            raw_file_in: client/template/**/*.html
+            raw_file_out: public/
+
+    js:
+        cp:
+            raw_file_in: client/javascript/**/*.js
+            raw_file_out: public/scripts/
+
+    stylus:
+        raw_file_in: client/stylus/app.styl
+        raw_file_out: public/styles/app.css
