@@ -59,3 +59,5 @@ then
 fi
 pip install --upgrade -e git+https://github.com/dozymoe/PyBuildTool@master#egg=PyBuildTool || fatal 'Cannot install pybuildtool'
 waf configure || fatal 'Cannot configure pybuildtool'
+
+waf clean build
