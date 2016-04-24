@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="styles/app.css">
 
 <script src="scripts/vendor/angular/angular.min.js"></script>
+<script src="scripts/vendor/angular-route/angular-route.min.js"></script>
 <script src="scripts/vendor/jquery/dist/jquery.min.js"></script>
 <script src="scripts/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="scripts/app.js"></script>
@@ -36,36 +37,14 @@
 
     <nav id="my-navbar" class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li><a href="#summary">Summary</a>
-        <li><a href="#widgets">Widgets</a>
+        <li><a href="/#/">Summary</a>
+        <li><a href="/#/options">Options</a>
+        <li><a href="/#/widgets">Widgets</a>
+        <li><a href="/#/mixins">Mixins</a>
       </ul>
     </nav>
   </div>
 </header>
 
-<div class="container">
-  <div class="row" id="summary">
-    <div class="col-md-12">
-      <h2>Summary</h2>
-      <ul>
-        <li>Client side table framework.
-        <li>Easy to implement your own widget.
-        <li>Uses event listeners and triggers to communicate between widgets.
-        <li>Packed with filter, pager, and sorting widgets.
-      </ul>
-    </div>
-  </div>
-
-  <div class="row" id="widgets">
-    <div class="col-md-9" role="main">
-      <h2>Widgets</h2>
-      <h3>fhTable</h3>
-      <h3>fhTableRow</h3>
-      <h3>fhTableFilterSelect</h3>
-      <h3>fhTableSorting</h3>
-      <h3>fhTablePager</h3>
-    </div>
-
-    <div class="col-md-3" role="complementary">
-    </div>
+<div class="container" data-ng-view>
 </div>

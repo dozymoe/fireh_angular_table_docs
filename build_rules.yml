@@ -5,11 +5,15 @@ server:
 
     html:
         cp:
+            options:
+                _source_basedir_: client/template/
             raw_file_in: client/template/**/*.html
             raw_file_out: public/
 
     js:
         cp:
+            options:
+                _source_basedir_: client/javascript/
             raw_file_in: client/javascript/**/*.js
             raw_file_out: public/scripts/
 
