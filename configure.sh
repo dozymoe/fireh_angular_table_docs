@@ -61,4 +61,5 @@ pip install --upgrade -e git+https://github.com/dozymoe/PyBuildTool@master#egg=P
 waf configure || fatal 'Cannot configure pybuildtool'
 
 waf clean build
+export PACKAGE_ROOT_DIR=$(readlink -f '.')
 alembic upgrade head
