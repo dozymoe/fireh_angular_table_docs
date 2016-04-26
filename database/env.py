@@ -24,6 +24,8 @@ with open(os.path.join(ROOT_DIR, 'etc', 'database.yml')) as f:
         dburl += dbdata['host']
     else:
         dburl += 'localhost'
+    if 'port' in dbdata:
+        dburl += ':' + dbdata['port']
     dburl += '/' + dbdata['dbname']
     config.set_main_option('sqlalchemy.url', dburl)
 
