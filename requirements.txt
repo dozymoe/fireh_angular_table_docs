@@ -6,7 +6,8 @@ lazy-object-proxy==1.2.2
 Mako==1.0.4
 MarkupSafe==0.23
 pathtools==0.1.2
--e git+https://github.com/dozymoe/PyBuildTool@20997efb8fbcea24ede37f79556d2270754b72dd#egg=PyBuildTool
+psycopg2==2.6.1
+PyBuildTool==1.1.1
 pylint==1.5.5
 python-editor==1.0
 PyYAML==3.11

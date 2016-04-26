@@ -5,6 +5,7 @@ import os
 import shlex
 from argh import add_commands, dispatch
 from argparse import ArgumentParser
+from json import load as json_load
 
 ROOT_DIR = os.path.realpath(os.path.dirname(__file__))
 
@@ -56,6 +57,29 @@ def pip(*args):
     binargs = ['pip'] + list(args)
     os.execvp(binargs[0], binargs)
 commands.append(pip)
+
+
+def alembic(*args):
+    prepare()
+
+    if len(args) == 1:
+        args = shlex.split(args[0])
+
+    binargs = ['alembic'] + list(args)
+    os.execvp(binargs[0], binargs)
+commands.append(alembic)
+
+
+def runserver(*args):
+    prepare()
+
+    if len(args) == 1:
+        args = shlex.split(args[0])
+
+    os.chdir(os.path.join(ROOT_DIR, 'server'))
+    binargs = ['python', 'main.py'] + list(args)
+    os.execvp(binargs[0], binargs)
+commands.append(runserver)
 
 
 if __name__ == '__main__':

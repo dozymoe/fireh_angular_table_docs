@@ -1,4 +1,5 @@
 /public/
+/run/
 
 /etc/database.yml
 
@@ -20,6 +21,8 @@
 /.virtualenv/
 
 /python_modules
+
+*.pyc
 
 
 # vim

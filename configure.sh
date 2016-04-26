@@ -61,3 +61,4 @@ pip install --upgrade -e git+https://github.com/dozymoe/PyBuildTool@master#egg=P
 waf configure || fatal 'Cannot configure pybuildtool'
 
 waf clean build
+alembic upgrade head

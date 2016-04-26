@@ -5,9 +5,65 @@
     <p>To setup options, create an instance of FhTableDefinition, and through html markup provide it
        to table widgets.
 
-    <p>Provide empty scope, which primary use is event-hub.
+    <p>Provides empty scope, which primary use is event-hub.
 
     <p>All widgets listen and transmit events by means of this object, eventually getting the overall
        picture of pieces of data each widget was interested in.
+
+    <h3>FhTableDefinition</h3>
+
+    <h4>Fields</h4>
+    <p>Main purpose is helper for <code>items.getter</code>, a callback function which will perform
+       ajax requests to the REST api to get list of items.
+    <ul>
+      <li>
+        <strong>filter</strong>
+        <ul>
+          <li>
+            <strong>throttle</strong>
+            <p>Delay lookup (ajax requests), will by used by &lt;input type="text"&gt; with popup
+               search hints.
+        </ul>
+      <li>
+        <strong>filterBy</strong>
+        <p>Default filter-by for <code>items.getter</code>, a key-value pairs of table-field-name
+           and filter-value.
+      <li>
+        <strong>items</strong>
+        <ul>
+          <li>
+            <strong>getter</strong>
+            <p>The main work-horse, must return a promise of list of items.
+          <li>
+            <strong>identifierFields</strong>
+            <p>How to identify each items as unique, will be used with <code>_.pick()</code> and
+               <code>_.isEqual()</code>.
+            <p>Default to identify items by their <code>id</code> field, assuming there was one.
+            <p>Required! The widgets will break with a fatal error if you left this out.
+          <li>
+            <strong>page</strong>
+            <p>I have absolutely no idea why this "page" is here, while "filterBy" and "orderBy"
+               are a level above.
+            <p>Default active page for <code>items.getter</code>.
+          <li>
+            <strong>pageSize</strong>
+            <p>Determines how many items we want to collect from REST api from a single fetch,
+               will be used with <code>items.getter</code>
+        </ul>
+      <li>
+        <strong>orderBy</strong>
+        <p>Default order-by for <code>items.getter</code>, a list of list of two items,
+           table-field-name and <code>'asc'</code> or <code>'desc'</code>.
+        <p>For example, <code>[['id', 'asc'], ['name', 'asc']]</code>.
+    </ul>
+
+    <h4>Sub definition fields</h4>
+    <p>Each of these sub definitions are keyed by table-field-names and each table-field-names
+       have the fields above.
+    <ul>
+      <li><strong>fieldDefinition</strong>
+      <li><strong>filterDefinition</strong>
+      <li><strong>orderDefinition</strong>
+    </ul>
   </div>
 </div>
