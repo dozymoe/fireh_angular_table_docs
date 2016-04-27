@@ -5,15 +5,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
+<title>Demo fhTable</title>
 
-<link rel="stylesheets" href="/scripts/vendor/bootstrap/dist/css/bootstrap.min.css">
-<link rel="stylesheets" href="/scripts/vendor/bootstrap/dist/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="/scripts/vendor/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/scripts/vendor/bootstrap/dist/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="/styles/app.css">
 
 <script src="/scripts/vendor/angular/angular.min.js"></script>
 <script src="/scripts/vendor/angular-route/angular-route.min.js"></script>
 <script src="/scripts/vendor/jquery/dist/jquery.min.js"></script>
 <script src="/scripts/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/scripts/vendor/moment/min/moment.min.js"></script>
+<script src="/scripts/vendor/angular-moment/angular-moment.min.js"></script>
 
 <script src="/scripts/vendor/lodash/dist/lodash.min.js"></script>
 <script src="/scripts/vendor/fireh_angular_table/core.js"></script>
@@ -25,7 +28,93 @@
 
 <body data-ng-app="fhTableDemo" data-ng-controller="MainCtrl">
 
-<table data-fh-table="tableSettings">
-  <tr data-ng-repeat="row in data.items track by row.id">
-    <td>hai
-</table>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Demo fhTable</h1>
+
+      <p>View source and also take a look at this file
+         <a href="/scripts/demoapp-fh-table.js">demoapp-fh-table.js</a>.
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 text-right form-group">
+      <button data-ng-click="createNote()" class="btn btn-primary"
+          data-ng-disabled="isCreatingNote">
+
+        Create new Note
+      </button>
+    </div>
+  </div>
+
+  <div class="row" data-ng-hide="isCreatingNote">
+    <div class="col-md-12">
+      <div class="table-responsive">
+        <table data-fh-table="tableSettings" class="table table-striped">
+
+          <thead>
+            <tr>
+              <th>Id
+              <th>Title
+              <th>Author
+              <th>Content
+              <th>Date Created
+              <th>Date Modified
+          </thead>
+
+          <tr data-ng-repeat="row in data.items track by row.id">
+            <td>{{row.id}}
+            <td>{{row.title}}
+            <td>{{row.author}}
+            <td>{{row.body}}
+            <td am-time-ago="row.created_at">
+            <td am-time-ago="row.modified_at">
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="row ng-hide" data-ng-show="isCreatingNote">
+    <div class="col-md-12">
+      <form name="createNoteForm">
+        <div class="form-group">
+          <label for="edit-title">Title</label>
+          <input class="form-control" id="edit-title"
+              placeholder="Some title thingy"
+              data-ng-model="draft.title"
+              required
+              maxlength="50">
+        </div>
+
+        <div class="form-group">
+          <label for="edit-author">Author</label>
+          <input class="form-control" id="edit-author"
+              placeholder="Slim Shady"
+              data-ng-model="draft.author"
+              required
+              maxlength="50">
+        </div>
+
+        <div class="form-group">
+          <label for="edit-body">Content</label>
+          <textarea class="form-control" id="edit-body"
+              placeholder="This is a note!"
+              data-ng-model="draft.body"
+              maxlength="250">
+          </textarea>
+        </div>
+
+        <button class="btn btn-primary" data-ng-click="saveNote()"
+            data-ng-disabled="!createNoteForm.$valid">
+
+          Save
+        </button>
+
+        <button class="btn btn-cancel" data-ng-click="closeForm()">
+          Cancel
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

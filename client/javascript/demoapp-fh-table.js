@@ -1,5 +1,6 @@
 (function() {
   var app = angular.module('fhTableDemo', [
+      'angularMoment',
       'fireh_angular_table'
   ]);
 
@@ -50,7 +51,42 @@
     });
 
     function itemsGetter(payload) {
-      return $http.get('/rest/notes/', {params: POST2GET(payload)});
+      return $http.get('/rest/notes/', {params: POST2GET(payload)}).then(
+        function itemGetSuccess(response) {
+          _.forEach(response.data.items, function(item) {
+              item.created_at = new moment(item.created_at);
+              item.modified_at = new moment(item.modified_at);
+          });
+          return response.data;
+        }
+      );
     }
+
+
+    $scope.createNote = function() {
+      $scope.draft = {id: null};
+      $scope.createNoteForm.$setPristine();
+
+      $scope.isCreatingNote = true;
+    };
+
+    $scope.saveNote = function() {
+      params.trigger('addItem', $scope.draft);
+    };
+
+    $scope.closeForm = function() {
+      $scope.isCreatingNote = false;
+    };
+
+
+    params.on('itemAdded', $scope.closeForm);
+
+    params.on('addItem', function addNote(event, item) {
+      $http.post('/rest/notes/', item).then(
+        function addNoteSuccess(response) {
+          params.trigger('itemAdded', response.data);
+        }
+      );
+    });
   }]);
 })();

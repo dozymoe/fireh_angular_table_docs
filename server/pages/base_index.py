@@ -1,17 +1,18 @@
 from functools import partial
-from json import dumps as json_dump
+from json import dumps as json_dump, loads as json_load
 from twisted.internet.defer import inlineCallbacks, returnValue
 from twisted.web.server import NOT_DONE_YET
 from pages.base import BasePage
+from utils.json import ComplexEncoder
 
 class BaseIndexPage(BasePage):
     isLeaf = True
 
     @inlineCallbacks
     def async_render_GET(self, request):
-        response_body = yield self.get_query_GET()
+        response_body = yield self.run_query_GET(request.args)
         request.setHeader('Content-Type', 'application/json')
-        returnValue(json_dump(response_body).encode())
+        returnValue(json_dump(response_body, cls=ComplexEncoder).encode())
 
 
     def render_GET(self, request):
@@ -24,9 +25,11 @@ class BaseIndexPage(BasePage):
 
     @inlineCallbacks
     def async_render_POST(self, request):
-        yield
+        submission = json_load(request.content.read().decode())
+        response_body = yield self.run_query_POST(submission, request.args)
         request.setHeader('Content-Type', 'application/json')
-        returnValue('hai'.encode())
+        request.setResponseCode(201)
+        returnValue(json_dump(response_body, cls=ComplexEncoder).encode())
 
 
     def render_POST(self, request):
@@ -37,9 +40,9 @@ class BaseIndexPage(BasePage):
         return NOT_DONE_YET
 
 
-    def get_query_GET(self, **kwargs):
+    def run_query_GET(self, params):
         raise NotImplemented()
 
 
-    def get_query_POST(self, **kwargs):
+    def run_query_POST(self, submission, params):
         raise NotImplemented()
