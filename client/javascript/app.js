@@ -25,6 +25,10 @@
       .when('/widgets', {
         templateUrl: 'partials/widgets.html'
       })
+
+      .when('/events', {
+        templateUrl: 'partials/events.html'
+      })
     ;
   }]);
 })();

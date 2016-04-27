@@ -5,7 +5,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
-<title>fhTable Demo</title>
+<title>fhTablePager Demo</title>
 
 <link rel="stylesheet" href="/scripts/vendor/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="/scripts/vendor/bootstrap/dist/css/bootstrap-theme.min.css">
@@ -22,19 +22,22 @@
 <script src="/scripts/vendor/fireh_angular_table/core.js"></script>
 <script src="/scripts/vendor/fireh_angular_table/core_mixins.js"></script>
 <script src="/scripts/vendor/fireh_angular_table/table.js"></script>
+<script src="/scripts/vendor/fireh_angular_table/table_pager.js"></script>
 
-<script src="/scripts/demoapp-fh-table.js"></script>
+<script src="/scripts/demoapp-fh-table-pager.js"></script>
 
 
-<body data-ng-app="fhTableDemo" data-ng-controller="MainCtrl">
+<body data-ng-app="fhTablePagerDemo" data-ng-controller="MainCtrl">
 
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <h1>fhTable Demo</h1>
+      <h1>fhTablePager Demo</h1>
 
       <p>View source and also take a look at this file
-         <a href="/scripts/demoapp-fh-table.js">demoapp-fh-table.js</a>.
+         <a href="/scripts/demoapp-fh-table-pager.js">
+           demoapp-fh-table-pager.js
+         </a>.
     </div>
   </div>
 
@@ -72,6 +75,13 @@
             <td am-time-ago="row.modified_at">
         </table>
       </div>
+    </div>
+  </div>
+
+  <div class="row" data-ng-hide="isCreatingNote">
+    <div class="col-xs-7 col-xs-push-5 col-sm-6 col-sm-push-6 text-right
+        pagination-container" data-fh-table-pager="tableSettings"
+        data-pager-links-count="5">
     </div>
   </div>
 

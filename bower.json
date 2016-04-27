@@ -18,11 +18,12 @@
   ],
   "dependencies": {
     "angular": "^1.5.5",
-    "fireh_angular_table": "dozymoe/fireh_angular_table#^0.0.3",
+    "fireh_angular_table": "dozymoe/fireh_angular_table#^0.0.4",
     "bootstrap": "^3.3.6",
     "jquery": "^2.2.3",
     "angular-route": "^1.5.5",
     "moment": "^2.13.0",
-    "angular-moment": "^0.10.3"
+    "angular-moment": "^0.10.3",
+    "font-awesome": "^4.6.1"
   }
 }

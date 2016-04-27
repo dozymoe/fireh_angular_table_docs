@@ -23,8 +23,9 @@ class BasePage(Resource):
 
 
     def get_pager(self, params, total_items):
-        pageSize = params.get('pageSize', 20)
-        page = params.get('page', 1) - 1
+        pageSize = int(params.get(b'pageSize', ['20'])[0])
+        page = int(params.get(b'page', ['1'])[0]) - 1
+
         if page < 0:
             page = 0
         if page * pageSize > total_items:
@@ -38,14 +39,19 @@ class BasePage(Resource):
     def get_sql_filter_by_clause(self, params, allowed_keys):
         filter_by = []
         for key, type_ in allowed_keys:
-            filter_name = 'filterBy' + key.capitalize()
+            filter_name = ('filterBy' + key.capitalize()).encode()
             if not filter_name in params:
                 continue
 
+            params_filter_by = []
+            for filter_ in params[filter_name]:
+                params_filter_by.extend(x.strip() for x in filter_.decode().split(','))
+
             filter_ = []
-            values = [x.strip() for x in params[filter_name].split(',') if x]
-            for value in values:
-                if type_ is str:
+            for value in params_filter_by:
+                if len(value) == 0:
+                    continue
+                elif type_ is str:
                     filter_.append("%s contains '%%s%s%%s'" % (key, value))
                 else:
                     try:
@@ -64,8 +70,15 @@ class BasePage(Resource):
 
 
     def get_sql_order_by_clause(self, params, allowed_keys):
+        if not b'orderBy' in params:
+            return ''
+
+        params_order_by = []
+        for sort in params[b'orderBy']:
+            params_order_by.extend(x.strip() for x in sort.decode().split(','))
+
         order_by = []
-        for sort in params.get('orderBy', []):
+        for sort in params_order_by:
             if sort.startswith('-'):
                 direction = 'desc'
                 sort = sort[1:]

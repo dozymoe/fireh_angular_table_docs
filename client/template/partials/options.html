@@ -27,7 +27,8 @@
       <li>
         <strong>filterBy</strong>
         <p>Default filter-by for <code>items.getter</code>, a key-value pairs of table-field-name
-           and filter-value.
+           and list of filter-values.
+        <p>For example, <code>filterBy: {name: ['john', 'alex'], gender: ['male']}</code>.
       <li>
         <strong>items</strong>
         <ul>
@@ -47,14 +48,14 @@
             <p>Default active page for <code>items.getter</code>.
           <li>
             <strong>pageSize</strong>
-            <p>Determines how many items we want to collect from REST api from a single fetch,
+            <p>Determines how many items we want to collect from REST api with a single fetch,
                will be used with <code>items.getter</code>
         </ul>
       <li>
         <strong>orderBy</strong>
         <p>Default order-by for <code>items.getter</code>, a list of list of two items,
            table-field-name and <code>'asc'</code> or <code>'desc'</code>.
-        <p>For example, <code>[['id', 'asc'], ['name', 'asc']]</code>.
+        <p>For example, <code>orderBy: [['id', 'asc'], ['name', 'asc']]</code>.
     </ul>
 
     <h4>Sub definition fields</h4>

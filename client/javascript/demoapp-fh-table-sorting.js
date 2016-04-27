@@ -1,11 +1,12 @@
 (function() {
-  var app = angular.module('fhTableDemo', [
+  var app = angular.module('fhTableSortingDemo', [
       'angularMoment',
       'fireh_angular_table'
   ]);
 
 
-  app.controller('MainCtrl', ['$scope', '$http', 'FhTableDefinition', 'POST2GET_QueryParams',
+  app.controller('MainCtrl', ['$scope', '$http', 'FhTableDefinition',
+      'POST2GET_QueryParams',
       function($scope, $http, TableDefinition, POST2GET) {
 
     var params = $scope.tableSettings = new TableDefinition({
@@ -13,7 +14,7 @@
         getter: itemsGetter,
         identifierFields: 'id',
         page: 1,
-        pageSize: 20
+        pageSize: 5
       },
       orderBy: [['created_at', 'desc']]
     });
