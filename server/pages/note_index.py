@@ -4,9 +4,11 @@ from pages.base_index import BaseIndexPage
 
 class NoteIndexPage(BaseIndexPage):
 
-    filter_fields = (('author', str),)
+    filter_fields = (('author', str), ('title', str), ('country', int))
     input_fields = ('author', 'title', 'body')
-    select_fields = ('id', 'author', 'title', 'body', 'created_at', 'modified_at')
+    select_fields = ('id', 'author', 'title', 'body', 'created_at', 'modified_at',
+            'country')
+
     order_fields = ('author', 'created_at', 'id', 'title')
 
 

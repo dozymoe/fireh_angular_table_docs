@@ -52,7 +52,7 @@ class BasePage(Resource):
                 if len(value) == 0:
                     continue
                 elif type_ is str:
-                    filter_.append("%s contains '%%s%s%%s'" % (key, value))
+                    filter_.append("%s like '%%%s%%'" % (key, value))
                 else:
                     try:
                         value = type_(value)
