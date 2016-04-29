@@ -55,24 +55,24 @@ class NoteIndexPage(BaseIndexPage):
     def _create_note(self, cur, submission):
         current_time = utcnow()
 
-        keys = ['created_at', 'modified_at']
+        fields = ['created_at', 'modified_at']
         values = [str(current_time), str(current_time)]
         for key in submission:
             if not key in self.input_fields:
                 continue
-            keys.append(key)
+            fields.append(key)
             values.append(submission[key])
 
-        ret = yield cur.execute('insert into notes(' + ','.join(keys) +
-                ') values (' + ','.join(['%s'] * len(keys)) +
+        yield cur.execute('insert into notes(' + ','.join(fields) +\
+                ') values (' + ','.join(['%s'] * len(fields)) +\
                 ') returning id', values)
 
-        id_ = ret.fetchone()[0]
+        id_ = cur.fetchone()[0]
         yield cur.execute('update counts set value=value+1 where name=%s',
                 ('notes_total',))
 
-        ret = yield cur.execute('select ' + ','.join(self.select_fields) +
+        yield cur.execute('select ' + ','.join(self.select_fields) +\
                 ' from notes where id=%s', (id_,))
 
-        row = dict(zip(self.select_fields, ret.fetchone()))
+        row = dict(zip(self.select_fields, cur.fetchone()))
         returnValue(row)

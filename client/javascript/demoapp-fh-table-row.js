@@ -1,5 +1,5 @@
 (function() {
-  var app = angular.module('fhTableFilterSelectDemo', [
+  var app = angular.module('fhTableRowDemo', [
       'angularMoment',
       'fireh_angular_table'
   ]);
@@ -10,23 +10,6 @@
       function($scope, $http, TableDefinition, POST2GET) {
 
     var params = $scope.tableSettings = new TableDefinition({
-      filterDefinition: {
-        author: {
-          items: {
-            getter: authorsGetter,
-            identifierFields: 'author'
-          },
-          orderBy: [['author', 'asc']]
-        },
-        country: {
-          items: {
-            getter: countriesGetter,
-            identifierFields: 'id',
-            pageSize: 10
-          },
-          orderBy: [['name', 'asc']]
-        }
-      },
       items: {
         getter: itemsGetter,
         identifierFields: 'id',
@@ -43,22 +26,6 @@
               item.created_at = new moment(item.created_at);
               item.modified_at = new moment(item.modified_at);
           });
-          return response.data;
-        }
-      );
-    }
-
-    function countriesGetter(payload) {
-      return $http.get('/rest/countries/', {params: POST2GET(payload)}).then(
-        function countriesGetSuccess(response) {
-          return response.data;
-        }
-      );
-    }
-
-    function authorsGetter(payload) {
-      return $http.get('/rest/authors/', {params: POST2GET(payload)}).then(
-        function authorsGetSuccess(response) {
           return response.data;
         }
       );

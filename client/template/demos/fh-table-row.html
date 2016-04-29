@@ -5,7 +5,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
-<title>fhTableFilterSelect Demo</title>
+<title>fhTableRow Demo</title>
 
 <link rel="stylesheet" href="/scripts/vendor/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="/scripts/vendor/bootstrap/dist/css/bootstrap-theme.min.css">
@@ -20,7 +20,6 @@
 <script src="/scripts/vendor/lodash/dist/lodash.min.js"></script>
 <script src="/scripts/vendor/moment/min/moment.min.js"></script>
 <script src="/scripts/vendor/angular-moment/angular-moment.min.js"></script>
-<script src="/scripts/vendor/jquery-infinite-scroll-helper/jquery.infinite-scroll-helper.min.js"></script>
 
 <script src="/scripts/vendor/fireh_angular_table/core.js"></script>
 <script src="/scripts/vendor/fireh_angular_table/core_mixins.js"></script>
@@ -30,22 +29,20 @@
 <script src="/scripts/vendor/fireh_angular_table/table_sorting.js"></script>
 <script src="/scripts/vendor/fireh_angular_table/table_filter_text.js"></script>
 <script src="/scripts/vendor/fireh_angular_table/table_row.js"></script>
-<script src="/scripts/vendor/fireh_angular_table/infinite_scroll.js"></script>
-<script src="/scripts/vendor/fireh_angular_table/table_filter_select.js"></script>
 
-<script src="/scripts/demoapp-fh-table-filter-select.js"></script>
+<script src="/scripts/demoapp-fh-table-row.js"></script>
 
 
-<body data-ng-app="fhTableFilterSelectDemo" data-ng-controller="MainCtrl">
+<body data-ng-app="fhTableRowDemo" data-ng-controller="MainCtrl">
 
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <h1>fhTableFilterSelect Demo</h1>
+      <h1>fhTableRow Demo</h1>
 
       <p>View source and also take a look at this file
-         <a href="/scripts/demoapp-fh-table-filter-select.js">
-           demoapp-fh-table-filter-select.js
+         <a href="/scripts/demoapp-fh-table-row.js">
+           demoapp-fh-table-row.js
          </a>.
     </div>
   </div>
@@ -56,21 +53,6 @@
         <div data-fh-table-filter-text="title" data-params="tableSettings"
             data-placeholder="{{'title to search for'}}"
             class="form-group"></div>
-
-        <div data-fh-table-filter-select="country" data-params="tableSettings"
-            data-dropdown-label="Select Country"
-            class="form-group select-country">
-
-          <ul class="list-unstyled" data-fh-infinite-scroll>
-            <li data-ng-repeat="row in data.items track by row.id" fh-table-row="row">
-              <input type="checkbox" data-ng-click="select($event); $event.stopPropagation()"
-                  data-ng-checked="isSelected">
-
-              <i class="flag n-{{('0000' + row.id).slice(-3)}}"></i>
-              {{row.name}}
-            </li>
-          </ul>
-        </div>
       </form>
     </div>
 
