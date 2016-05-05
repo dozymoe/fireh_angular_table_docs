@@ -5,7 +5,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
-<title>fhTableFilterSelect Demo</title>
+<title>fhTableBatchActions Demo</title>
 
 <link rel="stylesheet" href="/scripts/vendor/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="/scripts/vendor/bootstrap/dist/css/bootstrap-theme.min.css">
@@ -32,25 +32,26 @@
 <script src="/scripts/vendor/fireh_angular_table/table_row.js"></script>
 <script src="/scripts/vendor/fireh_angular_table/infinite_scroll.js"></script>
 <script src="/scripts/vendor/fireh_angular_table/table_filter_select.js"></script>
+<script src="/scripts/vendor/fireh_angular_table/table_batch_actions.js"></script>
 
-<script src="/scripts/demoapp-fh-table-filter-select.js"></script>
+<script src="/scripts/demoapp-fh-table-batch-actions.js"></script>
 
 
-<body data-ng-app="fhTableFilterSelectDemo" data-ng-controller="MainCtrl">
+<body data-ng-app="fhTableBatchActionsDemo" data-ng-controller="MainCtrl">
 
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <h1>fhTableFilterSelect Demo</h1>
+      <h1>fhTableBatchActions Demo</h1>
 
       <p>View source and also take a look at this file
-         <a href="/scripts/demoapp-fh-table-filter-select.js">
-           demoapp-fh-table-filter-select.js
+         <a href="/scripts/demoapp-fh-table-batch-actions.js">
+           demoapp-fh-table-batch-actions.js
          </a>.
     </div>
   </div>
 
-  <div class="row">
+  <div class="row" data-ng-hide="isCreatingNote">
     <div class="col-md-10">
       <form class="form-inline">
         <div data-fh-table-filter-text="title" data-fhp-params="tableSettings"
@@ -118,11 +119,37 @@
 
   <div class="row" data-ng-hide="isCreatingNote">
     <div class="col-md-12">
+      <form class="form-inline">
+        <div class="form-group" data-fh-table-batch-actions="tableSettings">
+          <select data-ng-model="data.actionName" class="form-control">
+            <option value="">----------
+            <option value="touch">Update last modified timestamp
+            <option value="delete">Delete
+          </select>
+
+          <button class="form-control btn btn-default" data-ng-click="execute()"
+              data-ng-disabled="!data.selectedItems.length || !data.actionName">
+
+            Go
+          </button>
+
+          {{data.selectedItems.length}} of {{data.total}} selected.
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="row" data-ng-hide="isCreatingNote">
+    <div class="col-md-12">
       <div class="table-responsive">
         <table data-fh-table="tableSettings" class="table table-striped">
 
           <thead>
             <tr>
+              <th>
+                <input type="checkbox" data-ng-click="toggleSelectAll($event)"
+                    data-ng-checked="isAllSelected">
+
               <th>Id <div data-fh-table-sorting="id"></div>
               <th>Title <div data-fh-table-sorting="title"></div>
               <th>Author <div data-fh-table-sorting="author"></div>
@@ -134,6 +161,8 @@
           </thead>
 
           <tr data-ng-repeat="row in data.items track by row.id" data-fh-table-row="row">
+            <td>
+              <input type="checkbox" data-ng-click="toggleSelect($event)" data-ng-checked="isSelected">
             <td>{{row.id}}
             <td data-ng-class="{'info': isFieldModified('title')}">
               <span data-ng-if="!isEditing">{{row.title}}</span>
