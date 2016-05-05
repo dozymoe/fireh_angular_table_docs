@@ -28,11 +28,6 @@ class BasePage(Resource):
 
         if page < 0:
             page = 0
-        if page * pageSize > total_items:
-            if total > 0:
-                page = (total_items - 1) / pageSize
-            else:
-                page = 0
         return (page, pageSize)
 
 

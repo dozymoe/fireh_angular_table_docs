@@ -84,6 +84,26 @@
             </li>
           </ul>
         </div>
+
+        <div data-fh-table-filter-select="author" data-fhp-params="tableSettings"
+            data-fhp-dropdown-label="Select Author"
+            class="form-group select-author">
+
+          <div data-fh-transcluded="data-fh-table-filter-text" data-fhp-name="author"
+              data-fhp-placeholder="{{'author to search for'}}"
+              class="form-group"></div>
+
+          <ul class="list-unstyled"
+              data-fh-transcluded="data-fh-infinite-scroll"
+              data-fhp-init-callback="infiniteScrollPopupInit">
+
+            <li data-ng-repeat="row in data.items track by row.author" data-fh-table-row="row">
+              <input type="checkbox" data-ng-click="select($event); $event.stopPropagation()"
+                  data-ng-checked="isSelected">
+              {{row.author}}
+            </li>
+          </ul>
+        </div>
       </form>
     </div>
 
