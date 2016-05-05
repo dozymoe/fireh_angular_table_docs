@@ -80,6 +80,17 @@
       $scope.isCreatingNote = false;
     };
 
+    $scope.infiniteScrollPopupInit = function(ish) {
+      var drop_el = ish.$scrollContainer.closest('.dropdown');
+      if (drop_el) {
+        drop_el.on(
+          'shown.bs.dropdown',
+          function() {
+            ish.$scrollContainer.trigger('scroll.infiniteScrollHelper');
+          }
+        );
+      }
+    };
 
     params.on('itemAdded', $scope.closeForm);
 
