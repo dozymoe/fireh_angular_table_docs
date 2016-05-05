@@ -65,10 +65,7 @@
               data-fh-transcluded="data-fh-infinite-scroll"
               data-init-callback="infiniteScrollPopupInit">
 
-            <li data-ng-repeat="row in data.items track by row.id"
-                data-fh-transcluded="fh-table-row"
-                data-row-item="row">
-
+            <li data-ng-repeat="row in data.items track by row.id" data-fh-table-row="row">
               <input type="checkbox" data-ng-click="select($event); $event.stopPropagation()"
                   data-ng-checked="isSelected">
 

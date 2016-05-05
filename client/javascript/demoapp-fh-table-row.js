@@ -6,8 +6,7 @@
 
 
   app.controller('MainCtrl', ['$scope', '$http', 'FhTableDefinition',
-      'POST2GET_QueryParams',
-      function($scope, $http, TableDefinition, POST2GET) {
+      function($scope, $http, TableDefinition) {
 
     var params = $scope.tableSettings = new TableDefinition({
       items: {
@@ -20,7 +19,9 @@
     });
 
     function itemsGetter(payload) {
-      return $http.get('/rest/notes/', {params: POST2GET(payload)}).then(
+      return $http.get('/rest/notes/',
+          {params: params.POST2GETpayload(payload)}).then(
+
         function itemsGetSuccess(response) {
           _.forEach(response.data.items, function(item) {
               item.created_at = new moment(item.created_at);
@@ -74,36 +75,4 @@
       );
     });
   }]);
-
-
-  app.factory('POST2GET_QueryParams', function() {
-    return function(payload) {
-      var queryString = {},
-          params;
-
-      _.forOwn(payload, function(item, key) {
-        if (key !== 'orderBy' && key !== 'filterBy') {
-          queryString[key] = item;
-        }
-      });
-
-      // orderBy
-      params = _.transform(payload.orderBy, function(result, item) {
-        var direction = item[1] === 'desc' ? '-' : '';
-            result.push(direction + item[0]);
-      }, []);
-
-      if (params.length) { queryString.orderBy = params.join(','); }
-
-      // filterBy
-      _.forOwn(payload.filterBy, function(item, key) {
-        if (_.isArray(item)) {
-          item = item.join(',');
-        }
-        queryString['filterBy' + _.capitalize(key)] = item;
-      });
-
-      return queryString;
-    }
-  });
 })();

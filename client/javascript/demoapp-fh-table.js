@@ -20,7 +20,7 @@
 
     function itemsGetter(payload) {
       return $http.get('/rest/notes/',
-              {params: params.POST2GETpayload(payload)}).then(
+          {params: params.POST2GETpayload(payload)}).then(
 
         function itemGetSuccess(response) {
           _.forEach(response.data.items, function(item) {
