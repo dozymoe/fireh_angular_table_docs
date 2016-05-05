@@ -65,6 +65,36 @@
     <h3>Other widgets</h3>
     <ul>
       <li>FhInfiniteScroll
+      <li>
+        <h4>FhTranscluded</h4>
+        <p>When a widget allowed you to set its content by writing sub elements
+           html markup, this is called transclusion.
+        <p>You can set other angular directives in the content, but there is a
+           bug, the directives will be initialized twice, an exception to this
+           is when the directives are attached to elements with <code>ng-repeat</code>.
+        <p>This is a pseudo directive (there is no angular.directive(), just an
+           html attribute treated as special).
+
+        <p>For example, normally you would:
+        <pre><code>
+&lt;div data-widget-with-transclusion&gt;
+    &lt;div class="widget-s-content" data-another-directive
+            data-another-directive-params="one"&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+        </code></pre>
+
+        <p>That, will cause bugs, because of the transclusion thingy. The correct
+           markup:
+        <pre><code>
+&lt;div data-widget-with-transclusion&gt;
+    &lt;div class="widget-s-content" 
+            data-fh-transcluded="data-another-directive"
+            data-another-directive-params="one"&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+        </code></pre>
+
     </ul>
 
   </div>

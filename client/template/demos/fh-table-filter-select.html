@@ -61,16 +61,26 @@
             data-dropdown-label="Select Country"
             class="form-group select-country">
 
+          <ul class="list-unstyled" data-ng-if="data.selectedItems.length">
+            <li data-ng-repeat="row in data.selectedItems track by row.id" data-fh-table-row="row">
+              <input type="checkbox" data-ng-click="select($event); $event.stopPropagation()"
+                  checked>
+
+              <i class="flag n-{{('0000' + row.id).slice(-3)}}"></i>
+              {{row.name}}
+            </li>
+          </ul>
+
           <ul class="list-unstyled"
               data-fh-transcluded="data-fh-infinite-scroll"
               data-init-callback="infiniteScrollPopupInit">
 
             <li data-ng-repeat="row in data.items track by row.id" data-fh-table-row="row">
-              <input type="checkbox" data-ng-click="select($event); $event.stopPropagation()"
-                  data-ng-checked="isSelected">
-
-              <i class="flag n-{{('0000' + row.id).slice(-3)}}"></i>
-              {{row.name}}
+              <div data-ng-if="!isSelected">
+                <input type="checkbox" data-ng-click="select($event); $event.stopPropagation()">
+                <i class="flag n-{{('0000' + row.id).slice(-3)}}"></i>
+                {{row.name}}
+              </div>
             </li>
           </ul>
         </div>
