@@ -58,51 +58,57 @@
             class="form-group"></div>
 
         <div data-fh-table-filter-select="country" data-fhp-params="tableSettings"
-            data-fhp-dropdown-label="Select Country"
             class="form-group select-country">
 
-          <ul class="list-unstyled" data-ng-if="data.selectedItems.length">
-            <li data-ng-repeat="row in data.selectedItems track by row.id" data-fh-table-row="row">
-              <input type="checkbox" data-ng-click="toggleSelect($event); $event.stopPropagation()"
-                  checked>
+          <div data-fh-transclude-pane="label">Select Country</div>
 
-              <i class="flag n-{{('0000' + row.id).slice(-3)}}"></i>
-              {{row.name}}
-            </li>
-          </ul>
+          <div data-fh-transclude-pane="content">
+            <ul class="list-unstyled" data-ng-if="data.selectedItems.length">
+              <li data-ng-repeat="row in data.selectedItems track by row.id" data-fh-table-row="row">
+                <input type="checkbox" data-ng-click="toggleSelect($event); $event.stopPropagation()"
+                    checked>
 
-          <ul class="list-unstyled"
-              data-fh-transcluded="data-fh-infinite-scroll"
-              data-fhp-init-callback="infiniteScrollPopupInit">
-
-            <li data-ng-repeat="row in data.items track by row.id" data-fh-table-row="row">
-              <div data-ng-if="!isSelected">
-                <input type="checkbox" data-ng-click="toggleSelect($event); $event.stopPropagation()">
                 <i class="flag n-{{('0000' + row.id).slice(-3)}}"></i>
                 {{row.name}}
-              </div>
-            </li>
-          </ul>
+              </li>
+            </ul>
+
+            <ul class="list-unstyled"
+                data-fh-transcluded="data-fh-infinite-scroll"
+                data-fhp-init-callback="infiniteScrollPopupInit">
+
+              <li data-ng-repeat="row in data.items track by row.id" data-fh-table-row="row">
+                <div data-ng-if="!isSelected">
+                  <input type="checkbox" data-ng-click="toggleSelect($event); $event.stopPropagation()">
+                  <i class="flag n-{{('0000' + row.id).slice(-3)}}"></i>
+                  {{row.name}}
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
 
         <div data-fh-table-filter-select="author" data-fhp-params="tableSettings"
-            data-fhp-dropdown-label="Select Author"
             class="form-group select-author">
 
-          <div data-fh-transcluded="data-fh-table-filter-text" data-fhp-name="author"
-              data-fhp-placeholder="{{'author to search for'}}"
-              class="form-group"></div>
+          <div data-fh-transclude-pane="label">Select Author</div>
 
-          <ul class="list-unstyled"
-              data-fh-transcluded="data-fh-infinite-scroll"
-              data-fhp-init-callback="infiniteScrollPopupInit">
+          <div data-fh-transclude-pane="content">
+            <div data-fh-transcluded="data-fh-table-filter-text" data-fhp-name="author"
+                data-fhp-placeholder="{{'author to search for'}}"
+                class="form-group"></div>
 
-            <li data-ng-repeat="row in data.items track by row.author" data-fh-table-row="row">
-              <input type="checkbox" data-ng-click="toggleSelect($event); $event.stopPropagation()"
-                  data-ng-checked="isSelected">
-              {{row.author}}
-            </li>
-          </ul>
+            <ul class="list-unstyled"
+                data-fh-transcluded="data-fh-infinite-scroll"
+                data-fhp-init-callback="infiniteScrollPopupInit">
+
+              <li data-ng-repeat="row in data.items track by row.author" data-fh-table-row="row">
+                <input type="checkbox" data-ng-click="toggleSelect($event); $event.stopPropagation()"
+                    data-ng-checked="isSelected">
+                {{row.author}}
+              </li>
+            </ul>
+          </div>
         </div>
       </form>
     </div>

@@ -5,7 +5,7 @@ from pages.base_detail import BaseDetailPage
 class NoteDetailPage(BaseDetailPage):
 
     filter_fields = ()
-    input_fields = ('author', 'title', 'body')
+    input_fields = ('author', 'title', 'body', 'country')
     select_fields = ('id', 'author', 'title', 'body', 'created_at', 'modified_at',
             'country')
 

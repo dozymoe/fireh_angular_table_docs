@@ -5,7 +5,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
-<title>fhTableBatchActions Demo</title>
+<title>fhTableFieldSelect Demo</title>
 
 <link rel="stylesheet" href="/scripts/vendor/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="/scripts/vendor/bootstrap/dist/css/bootstrap-theme.min.css">
@@ -13,7 +13,8 @@
 <link rel="stylesheet" href="/scripts/vendor/country-flags/css/flags.css">
 <link rel="stylesheet" href="/styles/app.css">
 
-<script src="/scripts/vendor/angular/angular.min.js"></script>
+<!--script src="/scripts/vendor/angular/angular.min.js"></script-->
+<script src="/scripts/vendor/angular/angular.js"></script>
 <script src="/scripts/vendor/angular-route/angular-route.min.js"></script>
 <script src="/scripts/vendor/jquery/dist/jquery.min.js"></script>
 <script src="/scripts/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -33,20 +34,21 @@
 <script src="/scripts/vendor/fireh_angular_table/infinite_scroll.js"></script>
 <script src="/scripts/vendor/fireh_angular_table/table_filter_select.js"></script>
 <script src="/scripts/vendor/fireh_angular_table/table_batch_actions.js"></script>
+<script src="/scripts/vendor/fireh_angular_table/table_field_select.js"></script>
 
-<script src="/scripts/demoapp-fh-table-batch-actions.js"></script>
+<script src="/scripts/demoapp-fh-table-field-select.js"></script>
 
 
-<body data-ng-app="fhTableBatchActionsDemo" data-ng-controller="MainCtrl">
+<body data-ng-app="fhTableFieldSelectDemo" data-ng-controller="MainCtrl">
 
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <h1>fhTableBatchActions Demo</h1>
+      <h1>fhTableFieldSelect Demo</h1>
 
       <p>View source and also take a look at this file
-         <a href="/scripts/demoapp-fh-table-batch-actions.js">
-           demoapp-fh-table-batch-actions.js
+         <a href="/scripts/demoapp-fh-table-field-select.js">
+           demoapp-fh-table-field-select.js
          </a>.
     </div>
   </div>
@@ -61,9 +63,9 @@
         <div data-fh-table-filter-select="country" data-fhp-params="tableSettings"
             class="form-group select-country">
 
-          <div data-fh-transclude-pane="label">Select Country</div>
+          <span data-fh-transclude-pane="label">Select Country</span>
 
-          <div data-fh-transclude-pane="content">
+          <div data-fh-transclude-pane="content"><div>
             <ul class="list-unstyled" data-ng-if="data.selectedItems.length">
               <li data-ng-repeat="row in data.selectedItems track by row.id" data-fh-table-row="row">
                 <input type="checkbox" data-ng-click="toggleSelect($event); $event.stopPropagation()"
@@ -86,15 +88,15 @@
                 </div>
               </li>
             </ul>
-          </div>
+          </div></div>
         </div>
 
         <div data-fh-table-filter-select="author" data-fhp-params="tableSettings"
             class="form-group select-author">
 
-          <div data-fh-transclude-pane="label">Select Author</div>
+          <span data-fh-transclude-pane="label">Select Author</span>
 
-          <div data-fh-transclude-pane="content">
+          <div data-fh-transclude-pane="content"><div>
             <div data-fh-transcluded="data-fh-table-filter-text" data-fhp-name="author"
                 data-fhp-placeholder="{{'author to search for'}}"
                 class="form-group"></div>
@@ -109,7 +111,7 @@
                 {{row.author}}
               </li>
             </ul>
-          </div>
+          </div></div>
         </div>
       </form>
     </div>
@@ -182,7 +184,37 @@
               <div data-ng-if="!isEditing">{{row.body}}</div>
               <textarea data-ng-if="isEditing" data-ng-model="draft.body" class="form-control"></textarea>
 
-            <td><i class="flag n-{{('0000' + row.country).slice(-3)}}" data-ng-show="row.country"></i>
+            <td data-ng-class="{'info': isFieldModified('country')}">
+              <div data-ng-if="!isEditing">
+                <i class="flag n-{{('0000' + row.country).slice(-3)}}" data-ng-show="row.country"></i>
+              </div>
+
+              <div data-ng-if="isEditing" data-fh-table-field-select="country" data-fhp-single-selection
+                  data-fhp-table-row="row" class="form-group select-country">
+
+                <span data-fh-transclude-pane="label">
+                  <i class="flag n-{{('0000' + draft.country).slice(-3)}}"></i>
+                </span>
+
+                <div data-fh-transclude-pane="content">
+                  <ul class="list-unstyled"
+                      data-fh-transcluded="data-fh-infinite-scroll"
+                      data-fhp-init-callback="infiniteScrollModalInit">
+
+                    <li data-ng-repeat="row in data.items track by row.id" data-fh-table-row="row">
+                      <button data-ng-click="select()">
+                        <i class="flag n-{{('0000' + row.id).slice(-3)}}"></i>
+                        {{row.name}}
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+
+                <div data-fh-transclude-pane="footer" class="modal-footer">
+                  <button class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+
             <td am-time-ago="row.created_at">
             <td am-time-ago="row.modified_at">
             <td>
