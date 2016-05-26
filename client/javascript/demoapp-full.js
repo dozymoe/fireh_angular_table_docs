@@ -197,7 +197,7 @@ app.controller('MainCtrl', [
     // in our case the element was hidden because it is a modal dialog's content
     $scope.infiniteScrollModalInit = function(ish) {
         var modal_el = ish.$scrollContainer.closest('.modal');
-        if (!modal_el) { return }
+        if (!modal_el) { return; }
 
         modal_el.on(
             'shown.bs.modal',
@@ -212,7 +212,7 @@ app.controller('MainCtrl', [
     // in our case the element was hidden because it is a popup content
     $scope.infiniteScrollPopupInit = function(ish) {
         var drop_el = ish.$scrollContainer.closest('.dropdown');
-        if (!drop_el) { return }
+        if (!drop_el) { return; }
 
         drop_el.on(
             'shown.bs.dropdown',
@@ -224,13 +224,13 @@ app.controller('MainCtrl', [
     //// events
 
     fhtable.on('editingBegin', function(event, draft, item, options) {
-        if (options.formId !== 'createNoteForm') { return }
+        if (options.formId !== 'createNoteForm') { return; }
         // show note creation form
         $scope.isCreatingNote = true;
     });
 
     fhtable.on('editingEnd', function(event, draft, item, options) {
-        if (options.formId !== 'createNoteForm') { return }
+        if (options.formId !== 'createNoteForm') { return; }
         // close note creation form
         $scope.isCreatingNote = false;
     });
@@ -311,7 +311,7 @@ app.controller('MainCtrl', [
 
         var widgetOptions = this.optionsGetter();
 
-        if (options.formId !== widgetOptions.formId) { return }
+        if (options.formId !== widgetOptions.formId) { return; }
 
         var scope = this.scope;
 

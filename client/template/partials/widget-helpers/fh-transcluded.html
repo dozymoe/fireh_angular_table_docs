@@ -1,0 +1,57 @@
+<div class="row breadcrumbs">
+  <nav class="col-md-12">
+    <p class="sr-only">You are here:
+    <ol>
+      <li><a href="/">Home</a>
+      <li><a href="/#/widgets">Widgets</a>
+      <li><a href="/#/widget-helpers">Widget Helpers</a>
+      <li>FhTranscluded
+    </ol>
+  </nav>
+</div>
+
+<div class="row">
+  <div class="col-md-8">
+
+    <h2>FhTranscluded</h2>
+
+    <p>When a widget allowed you to set its content by writing sub elements
+       html markup, this is called transclusion.
+
+    <p>You can set other angular directives in the content, but there is a
+       bug, the directives will be initialized twice, an exception to this
+       is when the directives are attached to elements
+       with <code>ng-repeat</code>.
+
+    <p>This is a pseudo directive (there is no angular.directive(), just an
+       html attribute treated as special).
+
+    <p>For example, normally you would:
+
+    <pre><code>
+&lt;div data-widget-with-transclusion&gt;
+    &lt;div class="widget-s-content" data-another-directive
+            data-another-directive-params="one"&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+    </code></pre>
+
+    <p>That, will cause bugs, because of the transclusion thingy. The correct
+       markup:
+
+    <pre><code>
+&lt;div data-widget-with-transclusion&gt;
+    &lt;div class="widget-s-content" 
+            data-fh-transcluded="data-another-directive"
+            data-another-directive-params="one"&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+    </code></pre>
+
+  </div>
+
+  <nav class="sidebar-navigation col-md-3 col-md-push-1">
+    <h2>See Also</h2>
+    <div data-ng-include="'/partials/widget-helpers-see-also.html'"></div>
+  </nav>
+</div>

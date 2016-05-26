@@ -188,20 +188,20 @@
             <td>{{row.id}}
 
             <td data-ng-if="!isEditing">{{row.title}}
-            <td data-ng-if="isEditing" data-ng-class="{'info': data.modifiedFields.title}">
+            <td data-ng-if="isEditing" data-ng-class="{'info': modifiedFields.title}">
               <input type="text" data-ng-model="draft.title" class="form-control" data-ng-change="triggerDraftUpdated()">
 
             <td data-ng-if="!isEditing">{{row.author}}
-            <td data-ng-if="isEditing" data-ng-class="{'info': data.modifiedFields.author}">
+            <td data-ng-if="isEditing" data-ng-class="{'info': modifiedFields.author}">
               <input type="text" data-ng-model="draft.author" class="form-control" data-ng-change="triggerDraftUpdated()">
 
             <td data-ng-if="!isEditing">{{row.body}}
-            <td data-ng-if="isEditing" data-ng-class="{'info': data.modifiedFields.body}">
+            <td data-ng-if="isEditing" data-ng-class="{'info': modifiedFields.body}">
               <textarea data-ng-model="draft.body" class="form-control" data-ng-change="triggerDraftUpdated()"></textarea>
 
             <td data-ng-if="!isEditing">
               <i class="flag n-{{('0000' + row.country).slice(-3)}}" data-ng-show="row.country"></i>
-            <td data-ng-if="isEditing" data-ng-class="{'info': data.modifiedFields.country}">
+            <td data-ng-if="isEditing" data-ng-class="{'info': modifiedFields.country}">
               <div data-fh-table-field-select="country" data-fhp-single-selection
                   data-fhp-table-row="row" class="form-group select-country">
 

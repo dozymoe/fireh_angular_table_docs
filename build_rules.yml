@@ -11,11 +11,17 @@ server:
             raw_file_out: public/
 
     js:
+        jshint:
+            options:
+                config_file: etc/jshint.rc
+            raw_file_in: client/javascript/**/*.js
+            token_out: "server:js:jshint"
         cp:
             options:
                 _source_basedir_: client/javascript/
             raw_file_in: client/javascript/**/*.js
             raw_file_out: public/scripts/
+            token_in: "server:js:jshint"
 
     stylus:
         raw_file_in: client/stylus/app.styl

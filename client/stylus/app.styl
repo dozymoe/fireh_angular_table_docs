@@ -1,5 +1,19 @@
-body
-    padding-top 5em
+.breadcrumbs
+    ol
+        margin-left 0
+        padding-left  0
+
+        > li
+            display  inline-block
+            margin-left  0.25em
+            margin-right  0.25em
+
+            &:before
+                content  "»"
+                margin-right  0.25em
+
+            &:first-child:before
+                content  none
 
 h1
     color #563d7c
@@ -8,7 +22,8 @@ h1
     margin 15px
 
 header.navbar
-    background-color rgba(255, 255, 255, 0.9)
+    background-color rgba(12,75,51, 0.1)
+    padding-top 2em
 
 @media screen and (min-width: 768px)
     h1
@@ -19,6 +34,21 @@ header.navbar
 
     .navbar-header
         float left
+
+    .navbar-nav
+        float right
+
+.navbar-header > h1
+    color  rgb(77,78,81)
+    font-size  2em
+    font-variant  small-caps
+    font-weight  bold
+    vertical-align  bottom
+
+.navbar-nav > li > a
+    color  rgb(77,78,81)
+    font-weight  bold
+    text-transform  uppercase
 
 .navbar-toggle
     > .icon-bar

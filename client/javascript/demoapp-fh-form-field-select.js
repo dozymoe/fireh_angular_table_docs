@@ -141,12 +141,12 @@
     });
 
     params.on('editingBegin', function(event, draft, item, options) {
-        if (options.formName !== 'createNoteForm') { return }
+        if (options.formName !== 'createNoteForm') { return; }
         $scope.isCreatingNote = true;
     });
 
     params.on('editingEnd', function(event, draft, item, options) {
-        if (options.formName !== 'createNoteForm') { return }
+        if (options.formName !== 'createNoteForm') { return; }
         $scope.isCreatingNote = false;
     });
 
