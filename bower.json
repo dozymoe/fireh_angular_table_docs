@@ -18,7 +18,7 @@
   ],
   "dependencies": {
     "angular": "^1.5.5",
-    "fireh_angular_table": "dozymoe/fireh_angular_table#^0.4.2",
+    "fireh_angular_table": "dozymoe/fireh_angular_table#^0.4.3",
     "bootstrap": "^3.3.6",
     "jquery": "^2.2.3",
     "angular-route": "^1.5.5",

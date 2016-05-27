@@ -175,6 +175,7 @@ app.controller('MainCtrl', [
         );
     });
 
+
     //// scope functions
 
     // linked to the button that display note creation form, when the form was
@@ -223,14 +224,23 @@ app.controller('MainCtrl', [
 
     //// events
 
+    fhtable.on('formDataUpdated', function(event, item, draft, options) {
+        if (options.formId !== 'createNoteForm') { return; }
+
+        // sorry for the round about way to just showing the form
+        fhtable.trigger('editingBegin', draft, item, options);
+    });
+
     fhtable.on('editingBegin', function(event, draft, item, options) {
         if (options.formId !== 'createNoteForm') { return; }
+
         // show note creation form
         $scope.isCreatingNote = true;
     });
 
     fhtable.on('editingEnd', function(event, draft, item, options) {
         if (options.formId !== 'createNoteForm') { return; }
+
         // close note creation form
         $scope.isCreatingNote = false;
     });
