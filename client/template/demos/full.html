@@ -13,8 +13,7 @@
 <link rel="stylesheet" href="/scripts/vendor/country-flags/css/flags.css">
 <link rel="stylesheet" href="/styles/app.css">
 
-<!--script src="/scripts/vendor/angular/angular.min.js"></script-->
-<script src="/scripts/vendor/angular/angular.js"></script>
+<script src="/scripts/vendor/angular/angular.min.js"></script>
 <script src="/scripts/vendor/angular-route/angular-route.min.js"></script>
 <script src="/scripts/vendor/jquery/dist/jquery.min.js"></script>
 <script src="/scripts/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -167,7 +166,9 @@
             <tr>
               <th>
                 <input type="checkbox" data-ng-click="toggleSelectAll($event)"
+                    data-ng-show="!isLoading"
                     data-ng-checked="isAllSelected">
+                <i data-ng-show="isLoading" class="fa fa-spinner"></i>
 
               <th>Id <div data-fh-table-sorting="id"></div>
               <th>Title <div data-fh-table-sorting="title"></div>
@@ -353,9 +354,10 @@
       <nav>
         <h2>Where to go from here?</h2>
         <ol>
-          <li><a href="/#widgets">All widgets</a>
-          <li><a href="/">Home</a>
-          <li><a href="https://github.com/dozymoe/fireh_angular_table">Github repository</a>
+          <li><a href="/#/widgets">Widgets</a>
+          <li><a href="/#/">Home</a>
+          <li><a href="https://github.com/dozymoe/fireh_angular_table">
+              Github repository</a>
         </ol>
       </nav>
     </div>

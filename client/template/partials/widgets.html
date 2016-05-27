@@ -11,13 +11,23 @@
 <div class="row">
   <div class="col-md-8">
 
-    <h2>Widgets</h2>
+    <h1>Widgets</h1>
 
     <p>All packaged widgets are set as attribute directives.
 
     <p>The widgets don't have to be laid in an hierarchical structure. Your
        &lt;table&gt; can be located in the middle of the page while your filter
-       and sorting widget in the sidebar or somewhere else.
+       and sorting widget in the sidebar or somewhere else. Those scattered
+       widgets will communicate by means of instance of <a href="/#/options">
+       FhTableDefinition</a>.
+
+   <h2>Demo</h2>
+
+   <p><a href="/demos/full.html">See demo of all widgets in action</a>.
+
+   <p>Notice that all helper widgets are outside of the scope of
+      <a href="/#/widgets/fh-table">FhTable</a>, they are not inside the table
+      html element, but somehow they managed to communicate with the table.
 
   </div>
 

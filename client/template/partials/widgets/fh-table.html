@@ -12,15 +12,59 @@
 <div class="row">
   <div class="col-md-8">
 
-    <h2>FhTable</h2>
+    <h1>FhTable</h1>
 
-    <p>Contrary to what the name implies, you don't need to attach this
-       widget to a &lt;table&gt;, and it doesn't provide any html markup.
+    <p>This widget doesn't provide any html markup.
        
-    <p>A wrapper to FhTableListResourceControllerMixin, provides scope
-       functions related to selection of all rows.
+    <p>A wrapper to <a href="/#/mixins/fh-table-list-resource-controller.html">
+       FhTableListResourceControllerMixin</a>, provides scope functions related
+       to selection of all rows.
 
-    <p><a href="/demos/fh-table.html">See fhTable demo</a>.
+
+    <h2>Directive parameters</h2>
+
+    <ul>
+      <li>
+        <strong>data-fh-table</strong> itself
+
+        <p>Expected value, instance of <a href="/#/options">
+           FhTableDefinition</a>.
+
+      <li>
+        <strong>data-fhp-table</strong>
+
+        <p>Expected value, instance of <a href="/#/options">
+           FhTableDefinition</a>, if you haven't set one already with <code>
+           data-fh-table</code>.
+
+      <li>
+        <strong>data-fhp-middlewares</strong>
+
+        <p>Expected value, comma separated list of services names.
+
+
+      <li>
+        <strong>data-fhe-*</strong>
+
+        <p>Custom event handler if you wanted to change this widget behaviour.
+
+    </ul>
+
+
+    <h2>Demo</h2>
+
+    <p><a href="/demos/fh-table.html">See FhTable demo</a>.
+
+    <p>The example shows how to create instance of <a href="/#/options">
+       FhTableDefinition</a> in angular controller and use
+       <code>data-fh-table</code> in html.
+
+    <p>FhTable is the one responsible for getting data/items from the REST API.
+
+
+    <h2>Widgets requirement</h2>
+
+    <p>None.
 
   </div>
 

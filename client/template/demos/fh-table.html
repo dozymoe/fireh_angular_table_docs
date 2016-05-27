@@ -5,10 +5,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
-<title>fhTable Demo</title>
+<title>FhTable Demo</title>
 
 <link rel="stylesheet" href="/scripts/vendor/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="/scripts/vendor/bootstrap/dist/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="/scripts/vendor/font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="/styles/app.css">
 
 <script src="/scripts/vendor/angular/angular.min.js"></script>
@@ -31,7 +32,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <h1>fhTable Demo</h1>
+      <h1>FhTable Demo</h1>
 
       <p>View source and also take a look at this file
          <a href="/scripts/demoapp-fh-table.js">demoapp-fh-table.js</a>.
@@ -39,16 +40,6 @@
   </div>
 
   <div class="row">
-    <div class="col-md-12 text-right form-group">
-      <button data-ng-click="createNote()" class="btn btn-primary"
-          data-ng-disabled="isCreatingNote">
-
-        Create new Note
-      </button>
-    </div>
-  </div>
-
-  <div class="row" data-ng-hide="isCreatingNote">
     <div class="col-md-12">
       <div class="table-responsive">
         <table data-fh-table="tableSettings" class="table table-striped">
@@ -75,46 +66,18 @@
     </div>
   </div>
 
-  <div class="row ng-hide" data-ng-show="isCreatingNote">
+  <div class="row">
     <div class="col-md-12">
-      <form name="createNoteForm">
-        <div class="form-group">
-          <label for="edit-title">Title</label>
-          <input class="form-control" id="edit-title"
-              placeholder="Some title thingy"
-              data-ng-model="draft.title"
-              required
-              maxlength="50">
-        </div>
-
-        <div class="form-group">
-          <label for="edit-author">Author</label>
-          <input class="form-control" id="edit-author"
-              placeholder="Slim Shady"
-              data-ng-model="draft.author"
-              required
-              maxlength="50">
-        </div>
-
-        <div class="form-group">
-          <label for="edit-body">Content</label>
-          <textarea class="form-control" id="edit-body"
-              placeholder="This is a note!"
-              data-ng-model="draft.body"
-              maxlength="250">
-          </textarea>
-        </div>
-
-        <button class="btn btn-primary" data-ng-click="saveNote()"
-            data-ng-disabled="!createNoteForm.$valid">
-
-          Save
-        </button>
-
-        <button class="btn btn-cancel" data-ng-click="closeForm()">
-          Cancel
-        </button>
-      </form>
+      <nav>
+        <h2>Where to go from here?</h2>
+        <ol>
+          <li><a href="/#/widgets/fh-table">FhTable</a>
+          <li><a href="/#/widgets">All widgets</a>
+          <li><a href="/#/">Home</a>
+          <li><a href="https://github.com/dozymoe/fireh_angular_table">
+              Github repository</a>
+        </ol>
+      </nav>
     </div>
   </div>
 </div>
