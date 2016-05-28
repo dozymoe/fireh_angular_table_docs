@@ -12,16 +12,86 @@
 <div class="row">
   <div class="col-md-8">
 
-    <h2>FhTableBatchActions</h2>
+    <h1>FhTableBatchActions</h1>
 
     <p>Perform actions on selected rows.
-    <p><a href="/demos/fh-table-batch-actions.html">See fhTableBatchActions
+
+
+    <h2>Angular Directive Parameters</h2>
+
+    <ul>
+      <li>
+        <strong>data-fh-table-batch-actions</strong> itself
+
+        <p>Expected value, instance of <a href="/#/options">
+           FhTableDefinition</a>.
+
+      <li>
+        <strong>data-fhp-table</strong>
+
+        <p>Expected value, instance of <a href="/#/options">
+           FhTableDefinition</a>, if you haven't set one already with <code>
+           data-fh-table-batch-actions</code>.
+
+      <li>
+        <strong>data-fhp-middlewares</strong>
+
+        <p>Expected value, comma separated list of services names.
+
+      <li>
+        <strong>data-fhe-*</strong>
+
+        <p>Custom event handler if you wanted to change this widget behaviour.
+
+    </ul>
+
+
+    <h2>Demo</h2>
+
+    <p><a href="/demos/fh-table-batch-actions.html">See FhTableBatchActions
        demo</a>
+
+
+    <h2>Widgets Requirement</h2>
+
+    <ol>
+      <li><a href="/#/widgets/fh-table">FhTable</a>
+      <li><a href="/#/widgets/fh-table-row">FhTableRow</a>
+    </ol>
 
   </div>
 
   <nav class="sidebar-navigation col-md-3 col-md-push-1">
     <h2>See Also</h2>
+
     <div data-ng-include="'/partials/widgets-see-also.html'"></div>
+
+
+    <h2>Events Listened</h2>
+
+    <ul>
+      <li>
+        <h3>Display Events</h3>
+
+        <ul>
+          <li><a href="/#/events/item-data-updated">itemDataUpdated</a>
+          <li><a href="/#/events/item-deleted">itemDeleted</a>
+          <li><a href="/#/events/item-deselected">itemDeselected</a>
+          <li><a href="/#/events/item-selected">itemSelected</a>
+          <li><a href="/#/events/items-total-updated">itemsTotalUpdated</a>
+        </ul>
+    </ul>
+
+
+    <h2>Events Triggered</h2>
+
+    <ul>
+      <li>
+        <h3>Action Events</h3>
+
+        <ul>
+          <li><a href="/#/events/batch-action">batchAction</a>
+        </ul>
+    </ul>
   </nav>
 </div>

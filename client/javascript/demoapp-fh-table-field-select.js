@@ -1,194 +1,163 @@
 (function() {
-  var app = angular.module('fhTableFieldSelectDemo', [
-      'angularMoment',
-      'fireh_angular_table'
-  ]);
+var app = angular.module('fhTableFieldSelectDemo', [
+    'angularMoment',
+    'fireh_angular_table'
+]);
 
 
-  app.controller('MainCtrl', ['$scope', '$http', 'FhTableDefinition',
-      function($scope, $http, TableDefinition) {
+app.controller('MainCtrl', [
+    '$scope',
+    '$http',
+    'FhTableDefinition',
+    function(
+        $scope,
+        $http,
+        TableDefinition) {
 
-    var params = $scope.tableSettings = new TableDefinition({
-      eventHandlers: {
-        // overrides fh-table-row event handlers because our `note.country`
-        // is not an object of `country` as expected, but only stores its
-        // `id` property
-        draftSetField: _onDraftSetField,
-        draftUnsetField: _onDraftUnsetField
-      },
-
-      fieldDefinition: {
-        country: {
-          items: {
-            getter: countriesGetter,
-            identifierFields: 'id',
-            pageSize: 10
-          },
-          orderBy: [['name', 'asc']]
-        }
-      },
-      filterDefinition: {
-        author: {
-          items: {
-            getter: authorsGetter,
-            identifierFields: 'author'
-          },
-          orderBy: [['author', 'asc']]
+    var fhtable = $scope.tableSettings = new TableDefinition({
+        fieldDefinition: {
+            country: {
+                items: {
+                    getter: countriesGetter,
+                    identifierFields: 'id',
+                    pageSize: 10
+                },
+                orderBy: [['name', 'asc']]
+            }
         },
-        country: {
-          items: {
-            getter: countriesGetter,
+        items: {
+            getter: itemsGetter,
             identifierFields: 'id',
-            pageSize: 10
-          },
-          orderBy: [['name', 'asc']]
+            page: 1,
+            pageSize: 5
+        },
+        orderBy: [['created_at', 'desc']],
+
+        eventHandlers: {
+            // overrides fh-table-row event handlers because our `note.country`
+            // is not an object of `country` as expected, but only stores its
+            // `id` property
+            draftSetField: _onDraftSetField,
+            draftUnsetField: _onDraftUnsetField,
+            draftUpdated: _onDraftUpdated
         }
-      },
-      items: {
-        getter: itemsGetter,
-        identifierFields: 'id',
-        page: 1,
-        pageSize: 5
-      },
-      orderBy: [['created_at', 'desc']]
     });
 
-    function itemsGetter(payload) {
-      return $http.get('/rest/notes/',
-          {params: params.POST2GETpayload(payload)}).then(
+    // to clean up manually, later call fhtable.destroy();
 
-        function itemsGetSuccess(response) {
-          _.forEach(response.data.items, function(item) {
-              item.created_at = new moment(item.created_at);
-              item.modified_at = new moment(item.modified_at);
-          });
-          return response.data;
-        }
-      );
+    //// CRUD
+
+    function itemsGetter(payload) {
+        return $http.get(
+            '/rest/notes/',
+            {
+                params: fhtable.POST2GETpayload(payload)
+            }).then(
+
+            function itemsGetSuccess(response) {
+                _.forEach(response.data.items, function(item) {
+                    item.created_at = new moment(item.created_at);
+                    item.modified_at = new moment(item.modified_at);
+                });
+                return response.data;
+            });
     }
 
     function countriesGetter(payload) {
-      return $http.get('/rest/countries/',
-          {params: params.POST2GETpayload(payload)}).then(
+        return $http.get(
+            '/rest/countries/',
+            {
+                params: fhtable.POST2GETpayload(payload)
+            }).then(
 
-        function countriesGetSuccess(response) {
-          return response.data;
-        }
-      );
+            function countriesGetSuccess(response) {
+                return response.data;
+            });
     }
 
-    function authorsGetter(payload) {
-      return $http.get('/rest/authors/',
-          {params: params.POST2GETpayload(payload)}).then(
+    //// scope functions
 
-        function authorsGetSuccess(response) {
-          return response.data;
-        }
-      );
-    }
+    // jQuery-infinite-scoll-helper didn't work when the html element with
+    // scrollbar was not visible, for example having style `display:none`
+    //
+    // in our case the element was hidden because it is a modal dialog's content
+    $scope.infiniteScrollModalInit = function(ish) {
+        var modal_el = ish.$scrollContainer.closest('.modal');
+        if (!modal_el) { return; }
 
-
-    $scope.createNote = function() {
-      $scope.draft = {id: null};
-      $scope.createNoteForm.$setPristine();
-
-      $scope.isCreatingNote = true;
+        modal_el.on(
+            'shown.bs.modal',
+            function() {
+                ish.$scrollContainer.trigger('scroll.infiniteScrollHelper');
+            });
     };
-
-    $scope.saveNote = function() {
-      params.trigger('addItem', $scope.draft);
-    };
-
-    $scope.closeForm = function() {
-      $scope.isCreatingNote = false;
-    };
-
-    $scope.infiniteScrollPopupInit = function(ish) {
-      var drop_el = ish.$scrollContainer.closest('.dropdown');
-      if (drop_el) {
-        drop_el.on(
-          'shown.bs.dropdown',
-          function() {
-            ish.$scrollContainer.trigger('scroll.infiniteScrollHelper');
-          }
-        );
-      }
-    };
-
-    params.on('itemAdded', $scope.closeForm);
-
-    params.on('addItem', function addNote(event, item, options) {
-      $http.post('/rest/notes/', item).then(
-        function addNoteSuccess(response) {
-          params.trigger('itemAdded', response.data, options);
-        }
-      );
-    });
-
-    params.on('deleteItem', function deleteNote(event, item, options) {
-      $http.delete('/rest/notes/' + item.id).then(
-        function deleteNoteSuccess() {
-          params.trigger('itemDeleted', item, options);
-        }
-      );
-    });
-
-    params.on('updateItemData', function editNote(event, newItem, oldItem,
-            options) {
-
-      $http.put('/rest/notes/' + oldItem.id, newItem).then(
-        function editNoteSuccess(response) {
-          params.trigger('itemDataUpdated', response.data, oldItem, options);
-        }
-      );
-    });
-
-    params.on('batchAction', function batchAction(event, name, items) {
-      var now = new moment();
-
-      _.forEach(items, function(item) {
-        var newItem;
-
-        if (name === 'touch') {
-          newItem = _.clone(item);
-          item.modified_at = now;
-          params.trigger('updateItemData', newItem, item);
-        } else if (name === 'delete') {
-          params.trigger('deleteItem', item);
-        }
-      });
-    });
 
     //// custom event handlers
 
-    function _onDraftSetField(event, item, fieldName, value) {
-      if (fieldName !== 'country') {
-        return this.oldCallback(event, item, fieldName, value);
-      }
+    // if implemented as library it is called middleware
+    //
+    // `fhtable.middlewares` only listed the library names, while the middleware
+    // instances themselves are in `fhtable.services`
+    //
+    // `this` is usually bound to object with fields: 'scope', 'fhtable',
+    // 'nextCallback', and 'optionsGetter'
 
-      var params = this.params;
-      var scope = this.scope;
+    function _onDraftSetField(event, item, fieldName, value, options) {
+        // we are only interested with the field: `country`
+        if (fieldName !== 'country') {
+            return this.nextCallback(event, item, fieldName, value, options);
+        }
 
-      if (params.isItemsEqual(scope.original, item)) {
+        var widgetOptions = this.optionsGetter();
+
+        if (options.formId !== widgetOptions.formId) {
+            return this.nextCallback(event, item, fieldName, value, options);
+        }
+
+        var scope = this.scope;
+
+        // don't store the entire object in this field, just its `id`
         scope.draft[fieldName] = value.id;
-        params.trigger('draftUpdated', scope.draft);
-      }
+
+        this.fhtable.trigger('draftUpdated', scope.draft, item, options);
+
+        // we drop next callback (presumably the widget's original)
     }
 
-    function _onDraftUnsetField(event, item, fieldName, value) {
-      if (fieldName !== 'country') {
-        return this.oldCallback(event, item, fieldName, value);
-      }
+    function _onDraftUnsetField(event, item, fieldName, value, options) {
+        // we are only interested with the field: `country`
+        if (fieldName !== 'country') {
+            return this.nextCallback(event, item, fieldName, value, options);
+        }
 
-      var params = this.params;
-      var scope = this.scope;
+        var widgetOptions = this.optionsGetter();
 
-      if (params.isItemsEqual(scope.original, item) &&
-          scope.draft[fieldName] !== value.id) {
+        if (options.formId !== widgetOptions.formId) {
+            return this.nextCallback(event, item, fieldName, value, options);
+        }
+
+        var scope = this.scope;
 
         scope.draft[fieldName] = null;
-        params.trigger('draftUpdated', scope.draft);
-      }
+
+        this.fhtable.trigger('draftUpdated', scope.draft, item, options);
+
+        // we drop next callback (presumably the widget's original)
     }
-  }]);
+
+    function _onDraftUpdated(event, draft, item, options) {
+        this.nextCallback(event, draft, item, options);
+
+        var widgetOptions = this.optionsGetter();
+
+        if (options.formId !== widgetOptions.formId) { return; }
+
+        var scope = this.scope;
+
+        if (scope.data.modifiedFields) {
+            scope.data.modifiedFields.country = draft.country !==
+                    scope.original.country;
+        }
+    }
+}]);
 })();

@@ -14,7 +14,6 @@
 <link rel="stylesheet" href="/styles/app.css">
 
 <script src="/scripts/vendor/angular/angular.min.js"></script>
-<script src="/scripts/vendor/angular-route/angular-route.min.js"></script>
 <script src="/scripts/vendor/jquery/dist/jquery.min.js"></script>
 <script src="/scripts/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="/scripts/vendor/lodash/dist/lodash.min.js"></script>
@@ -180,30 +179,46 @@
               <th>Actions
           </thead>
 
-          <tr data-ng-repeat="row in data.items track by row.id" data-fh-table-row="row"
-              data-fhp-middlewares="fss" data-fhp-editable>
+          <tr data-ng-repeat="row in data.items track by row.id"
+              data-fh-table-row="row" data-fhp-editable
+              data-fhp-middlewares="fss">
 
             <td>
-              <input type="checkbox" data-ng-click="toggleSelect($event)" data-ng-checked="isSelected">
+              <input type="checkbox" data-ng-click="toggleSelect($event)"
+                  data-ng-checked="isSelected">
 
             <td>{{row.id}}
 
             <td data-ng-if="!isEditing">{{row.title}}
-            <td data-ng-if="isEditing" data-ng-class="{'info': modifiedFields.title}">
-              <input type="text" data-ng-model="draft.title" class="form-control" data-ng-change="triggerDraftUpdated()">
+            <td data-ng-if="isEditing"
+                data-ng-class="{'info': modifiedFields.title}">
+
+              <input type="text" data-ng-model="draft.title"
+                  class="form-control" data-ng-change="triggerDraftUpdated()">
 
             <td data-ng-if="!isEditing">{{row.author}}
-            <td data-ng-if="isEditing" data-ng-class="{'info': modifiedFields.author}">
-              <input type="text" data-ng-model="draft.author" class="form-control" data-ng-change="triggerDraftUpdated()">
+            <td data-ng-if="isEditing"
+                data-ng-class="{'info': modifiedFields.author}">
+
+              <input type="text" data-ng-model="draft.author"
+                  class="form-control" data-ng-change="triggerDraftUpdated()">
 
             <td data-ng-if="!isEditing">{{row.body}}
-            <td data-ng-if="isEditing" data-ng-class="{'info': modifiedFields.body}">
-              <textarea data-ng-model="draft.body" class="form-control" data-ng-change="triggerDraftUpdated()"></textarea>
+            <td data-ng-if="isEditing"
+                data-ng-class="{'info': modifiedFields.body}">
+
+              <textarea data-ng-model="draft.body" class="form-control"
+                  data-ng-change="triggerDraftUpdated()"></textarea>
 
             <td data-ng-if="!isEditing">
-              <i class="flag n-{{('0000' + row.country).slice(-3)}}" data-ng-show="row.country"></i>
-            <td data-ng-if="isEditing" data-ng-class="{'info': modifiedFields.country}">
-              <div data-fh-table-field-select="country" data-fhp-single-selection
+              <i class="flag n-{{('0000' + row.country).slice(-3)}}"
+                  data-ng-show="row.country"></i>
+
+            <td data-ng-if="isEditing"
+                data-ng-class="{'info': modifiedFields.country}">
+
+              <div data-fh-table-field-select="country"
+                  data-fhp-single-selection
                   data-fhp-table-row="row" class="form-group select-country">
 
                 <span data-fh-transclude-pane="caption">
@@ -216,8 +231,12 @@
                         data-fh-transcluded="data-fh-infinite-scroll"
                         data-fhp-init-callback="infiniteScrollModalInit">
 
-                      <li data-ng-repeat="row in data.items track by row.id" data-fh-table-row="row">
-                        <button type="button" class="btn btn-default" data-ng-click="select()">
+                      <li data-ng-repeat="row in data.items track by row.id"
+                          data-fh-table-row="row">
+
+                        <button type="button" class="btn btn-default"
+                            data-ng-click="select()">
+                            
                           <i class="flag n-{{('0000' + row.id).slice(-3)}}"></i>
                           {{row.name}}
                         </button>
@@ -226,7 +245,9 @@
                   </div>
 
                   <div class="modal-footer">
-                    <button class="btn btn-primary" data-dismiss="modal">Close</button>
+                    <button class="btn btn-primary" data-dismiss="modal">
+                      Close
+                    </button>
                   </div>
                 </div>
               </div>
@@ -235,19 +256,31 @@
             <td am-time-ago="row.modified_at">
             <td>
               <span style="white-space:nowrap">
-                <button ng-if="!isEditing" ng-click="edit()" class="btn btn-default">
-                  <i class="glyphicon glyphicon-pencil" title="{{ 'Edit' }}"></i>
+                <button ng-if="!isEditing" ng-click="edit()"
+                    class="btn btn-default">
+
+                  <i class="glyphicon glyphicon-pencil"
+                      title="{{ 'Edit' }}"></i>
                 </button>
 
-                <button ng-if="!isEditing" ng-click="delete()" class="btn btn-default">
-                  <i class="glyphicon glyphicon-trash" title="{{ 'Delete' }}"></i>
+                <button ng-if="!isEditing" ng-click="delete()"
+                    class="btn btn-default">
+
+                  <i class="glyphicon glyphicon-trash"i
+                      title="{{ 'Delete' }}"></i>
                 </button>
-                <button ng-if="isEditing" ng-click="save()" class="btn btn-success">
+
+                <button ng-if="isEditing" ng-click="save()"
+                    class="btn btn-success">
+
                   <i class="glyphicon glyphicon-ok" title="{{ 'Save' }}"></i>
                 </button>
 
-                <button ng-if="isEditing" ng-click="cancel()" class="btn btn-danger">
-                  <i class="glyphicon glyphicon-remove" title="{{ 'Cancel' }}"></i>
+                <button ng-if="isEditing" ng-click="cancel()"
+                    class="btn btn-danger">
+
+                  <i class="glyphicon glyphicon-remove"
+                      title="{{ 'Cancel' }}"></i>
                 </button>
               </span>
             </td>

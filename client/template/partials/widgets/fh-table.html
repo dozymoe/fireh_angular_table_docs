@@ -21,7 +21,7 @@
        to selection of all rows.
 
 
-    <h2>Directive parameters</h2>
+    <h2>Angular Directive Parameters</h2>
 
     <ul>
       <li>
@@ -62,7 +62,7 @@
     <p>FhTable is the one responsible for getting data/items from the REST API.
 
 
-    <h2>Widgets requirement</h2>
+    <h2>Widgets Requirement</h2>
 
     <p>None.
 
@@ -70,6 +70,85 @@
 
   <nav class="sidebar-navigation col-md-3 col-md-push-1">
     <h2>See Also</h2>
+
     <div data-ng-include="'/partials/widgets-see-also.html'"></div>
+
+
+    <h2>Events Listened</h2>
+
+    <ul>
+      <li>
+        <h3>Action Events</h3>
+
+        <ul>
+          <li><a href="/#/events/add-multiple-values-filter">
+              addMultipleValuesFilter</a>
+
+          <li><a href="/#/events/deselect-all-items">deselectAllItems</a>
+          <li><a href="/#/events/deselect-item">deselectItem</a>
+          <li><a href="/#/events/fetch-items">fetchItems</a>
+          <li><a href="/#/events/remove-multiple-values-filter">
+              removeMultipleValuesFilter</a>
+
+          <li><a href="/#/events/reset-items">resetItems</a>
+          <li><a href="/#/events/select-all-items">selectAllItems</a>
+          <li><a href="/#/events/select-item">selectItem</a>
+          <li><a href="/#/events/set-page-offset">setPageOffset</a>
+          <li><a href="/#/events/set-page-size">setPageSize</a>
+          <li><a href="/#/events/set-order">setOrder</a>
+          <li><a href="/#/events/set-single-value-filter">
+              setSingleValueFilter</a>
+        </ul>
+
+      <li>
+        <h3>Display Events</h3>
+
+        <ul>
+          <li><a href="/#/events/ajax-request-finished">ajaxRequestFinished</a>
+          <li><a href="/#/events/ajax-request-started">ajaxRequestStarted</a>
+          <li><a href="/#/events/item-added">itemAdded</a>
+              (possible override)
+          <li><a href="/#/events/item-data-updated">itemDataUpdated</a>
+          <li><a href="/#/events/item-deleted">itemDeleted</a>
+          <li><a href="/#/events/item-deselected">itemDeselected</a>
+              (partial override)
+          <li><a href="/#/events/item-selected">itemSelected</a>
+              (partial override)
+          <li><a href="/#/events/items-total-updated">itemsTotalUpdated</a>
+              (partial override)
+        </ul>
+    </ul>
+
+
+    <h2>Events Triggered</h2>
+
+    <ul>
+      <li>
+        <h3>Action Events</h3>
+
+        <ul>
+          <li><a href="/#/events/deselect-all-items">deselectAllItems</a>
+          <li><a href="/#/events/fetch-items">fetchItems</a>
+          <li><a href="/#/events/reset-items">resetItems</a>
+          <li><a href="/#/events/select-all-items">selectAllItems</a>
+        </ul>
+
+      <li>
+        <h3>Display Events</h3>
+
+        <ul>
+          <li><a href="/#/events/ajax-request-finished">ajaxRequestFinished</a>
+          <li><a href="/#/events/ajax-request-started">ajaxRequestStarted</a>
+          <li><a href="/#/events/filter-updated">filterUpdated</a>
+          <li><a href="/#/events/item-data-updated">itemDataUpdated</a>
+          <li><a href="/#/events/item-deselected">itemDeselected</a>
+          <li><a href="/#/events/item-selected">itemSelected</a>
+          <li><a href="/#/events/items-total-updated">itemsTotalUpdated</a>
+          <li><a href="/#/events/items-updated">itemsUpdated</a>
+          <li><a href="/#/events/order-updated">orderUpdated</a>
+          <li><a href="/#/events/page-offset-updated">pageOffsetUpdated</a>
+          <li><a href="/#/events/page-size-updated">pageSizeUpdated</a>
+        </ul>
+    </ul>
   </nav>
 </div>

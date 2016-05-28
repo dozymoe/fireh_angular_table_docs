@@ -86,8 +86,7 @@ app.controller('MainCtrl', [
                     item.modified_at = new moment(item.modified_at);
                 });
                 return response.data;
-            }
-        );
+            });
     }
 
     function countriesGetter(payload) {
@@ -331,4 +330,4 @@ app.controller('MainCtrl', [
         }
     }
 }]);
-})();
+}());
