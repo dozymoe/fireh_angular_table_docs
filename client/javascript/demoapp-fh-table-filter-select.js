@@ -1,126 +1,105 @@
 (function() {
-  var app = angular.module('fhTableFilterSelectDemo', [
-      'angularMoment',
-      'fireh_angular_table'
-  ]);
+var app = angular.module('fhTableFilterSelectDemo', [
+    'angularMoment',
+    'fireh_angular_table'
+]);
 
 
-  app.controller('MainCtrl', ['$scope', '$http', 'FhTableDefinition',
-      function($scope, $http, TableDefinition) {
+app.controller('MainCtrl', [
+    '$scope',
+    '$http',
+    'FhTableDefinition',
+    function(
+        $scope,
+        $http,
+        TableDefinition) {
 
-    var params = $scope.tableSettings = new TableDefinition({
-      filterDefinition: {
-        author: {
-          items: {
-            getter: authorsGetter,
-            identifierFields: 'author'
-          },
-          orderBy: [['author', 'asc']]
+    var fhtable = $scope.tableSettings = new TableDefinition({
+        filterDefinition: {
+            author: {
+                items: {
+                    getter: authorsGetter,
+                    identifierFields: 'author'
+                },
+                orderBy: [['author', 'asc']]
+            },
+            country: {
+                items: {
+                    getter: countriesGetter,
+                    identifierFields: 'id',
+                    pageSize: 10
+                },
+                orderBy: [['name', 'asc']]
+            }
         },
-        country: {
-          items: {
-            getter: countriesGetter,
+        items: {
+            getter: itemsGetter,
             identifierFields: 'id',
-            pageSize: 10
-          },
-          orderBy: [['name', 'asc']]
-        }
-      },
-      items: {
-        getter: itemsGetter,
-        identifierFields: 'id',
-        page: 1,
-        pageSize: 5
-      },
-      orderBy: [['created_at', 'desc']]
+            page: 1,
+            pageSize: 5
+        },
+        orderBy: [['created_at', 'desc']]
     });
 
-    function itemsGetter(payload) {
-      return $http.get('/rest/notes/',
-          {params: params.POST2GETpayload(payload)}).then(
+    // to clean up manually, later call fhtable.destroy();
 
-        function itemsGetSuccess(response) {
-          _.forEach(response.data.items, function(item) {
-              item.created_at = new moment(item.created_at);
-              item.modified_at = new moment(item.modified_at);
-          });
-          return response.data;
-        }
-      );
+    //// CRUD
+
+    function itemsGetter(payload) {
+        return $http.get(
+            '/rest/notes/',
+            {
+                params: fhtable.POST2GETpayload(payload)
+            }).then(
+
+            function itemsGetSuccess(response) {
+                _.forEach(response.data.items, function(item) {
+                    item.created_at = new moment(item.created_at);
+                    item.modified_at = new moment(item.modified_at);
+                });
+                return response.data;
+            });
     }
 
     function countriesGetter(payload) {
-      return $http.get('/rest/countries/',
-          {params: params.POST2GETpayload(payload)}).then(
+        return $http.get(
+            '/rest/countries/',
+            {
+                params: fhtable.POST2GETpayload(payload)
+            }).then(
 
-        function countriesGetSuccess(response) {
-          return response.data;
-        }
-      );
+            function countriesGetSuccess(response) {
+                return response.data;
+            });
     }
 
     function authorsGetter(payload) {
-      return $http.get('/rest/authors/',
-          {params: params.POST2GETpayload(payload)}).then(
+        return $http.get(
+            '/rest/authors/',
+            {
+                params: fhtable.POST2GETpayload(payload)
+            }).then(
 
-        function authorsGetSuccess(response) {
-          return response.data;
-        }
-      );
+            function authorsGetSuccess(response) {
+                return response.data;
+            });
     }
 
+    //// scope functions
 
-    $scope.createNote = function() {
-      $scope.draft = {id: null};
-      $scope.createNoteForm.$setPristine();
-
-      $scope.isCreatingNote = true;
-    };
-
-    $scope.saveNote = function() {
-      params.trigger('addItem', $scope.draft);
-    };
-
-    $scope.closeForm = function() {
-      $scope.isCreatingNote = false;
-    };
-
+    // jQuery-infinite-scoll-helper didn't work when the html element with
+    // scrollbar was not visible, for example having style `display:none`
+    //
+    // in our case the element was hidden because it is a popup content
     $scope.infiniteScrollPopupInit = function(ish) {
-      var drop_el = ish.$scrollContainer.closest('.dropdown');
-      if (drop_el) {
+        var drop_el = ish.$scrollContainer.closest('.dropdown');
+        if (!drop_el) { return; }
+
         drop_el.on(
-          'shown.bs.dropdown',
-          function() {
-            ish.$scrollContainer.trigger('scroll.infiniteScrollHelper');
-          }
-        );
-      }
+            'shown.bs.dropdown',
+            function() {
+                ish.$scrollContainer.trigger('scroll.infiniteScrollHelper');
+            });
     };
-
-    params.on('itemAdded', $scope.closeForm);
-
-    params.on('addItem', function addNote(event, item) {
-      $http.post('/rest/notes/', item).then(
-        function addNoteSuccess(response) {
-          params.trigger('itemAdded', response.data);
-        }
-      );
-    });
-
-    params.on('deleteItem', function deleteNote(event, item) {
-      $http.delete('/rest/notes/' + item.id).then(
-        function deleteNoteSuccess() {
-          params.trigger('itemDeleted', item);
-        }
-      );
-    });
-
-    params.on('updateItemData', function editNote(event, newItem, oldItem) {
-      $http.put('/rest/notes/' + oldItem.id, newItem).then(
-        function editNoteSuccess(response) {
-          params.trigger('itemDataUpdated', response.data, oldItem);
-        }
-      );
-    });
-  }]);
-})();
+}]);
+}());

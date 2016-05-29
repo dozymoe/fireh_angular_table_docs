@@ -61,18 +61,24 @@
             data-fhp-placeholder="{{'title to search for'}}"
             class="form-group"></div>
 
-        <div data-fh-table-filter-select="country" data-fhp-table="tableSettings"
+        <div data-fh-table-filter-select="country"
+            data-fhp-table="tableSettings"
             class="form-group select-country">
 
           <span data-fh-transclude-pane="caption">Select Country</span>
 
           <div data-fh-transclude-pane="popup"><div>
             <ul class="list-unstyled" data-ng-if="data.selectedItems.length">
-              <li data-ng-repeat="row in data.selectedItems track by row.id" data-fh-table-row="row">
-                <input type="checkbox" data-ng-click="toggleSelect($event); $event.stopPropagation()"
-                    checked id="{{elementId}}-{{row.id}}">
+              <li data-ng-repeat="row in data.selectedItems track by row.id"
+                  data-fh-table-row="row">
 
-                <label for="{{elementId}}-{{row.id}}" data-ng-click="$event.stopPropagation()">
+                <input type="checkbox"
+                    id="{{elementId}}-{{row.id}}" checked
+                    data-ng-click="toggleSelect($event); $event.stopPropagation()">
+
+                <label for="{{elementId}}-{{row.id}}"
+                    data-ng-click="$event.stopPropagation()">
+
                   <i class="flag n-{{('0000' + row.id).slice(-3)}}"></i>
                   {{row.name}}
                 </label>
@@ -83,12 +89,17 @@
                 data-fh-transcluded="data-fh-infinite-scroll"
                 data-fhp-init-callback="infiniteScrollPopupInit">
 
-              <li data-ng-repeat="row in data.items track by row.id" data-fh-table-row="row">
-                <div data-ng-if="!isSelected">
-                  <input type="checkbox" data-ng-click="toggleSelect($event); $event.stopPropagation()"
-                      id="{{elementId}}-{{row.id}}">
+              <li data-ng-repeat="row in data.items track by row.id"
+                  data-fh-table-row="row">
 
-                  <label for="{{elementId}}-{{row.id}}" data-ng-click="$event.stopPropagation()">
+                <div data-ng-if="!isSelected">
+                  <input type="checkbox"
+                      id="{{elementId}}-{{row.id}}"
+                      data-ng-click="toggleSelect($event); $event.stopPropagation()">
+
+                  <label for="{{elementId}}-{{row.id}}"
+                      data-ng-click="$event.stopPropagation()">
+
                     <i class="flag n-{{('0000' + row.id).slice(-3)}}"></i>
                     {{row.name}}
                   </label>
@@ -98,13 +109,15 @@
           </div></div>
         </div>
 
-        <div data-fh-table-filter-select="author" data-fhp-table="tableSettings"
+        <div data-fh-table-filter-select="author"
+            data-fhp-table="tableSettings"
             class="form-group select-author">
 
           <span data-fh-transclude-pane="caption">Select Author</span>
 
           <div data-fh-transclude-pane="popup"><div>
-            <div data-fh-transcluded="data-fh-table-filter-text" data-fhp-name="author"
+            <div data-fh-transcluded="data-fh-table-filter-text"
+                data-fhp-name="author"
                 data-fhp-placeholder="{{'author to search for'}}"
                 class="form-group"></div>
 
@@ -112,11 +125,17 @@
                 data-fh-transcluded="data-fh-infinite-scroll"
                 data-fhp-init-callback="infiniteScrollPopupInit">
 
-              <li data-ng-repeat="row in data.items track by row.author" data-fh-table-row="row">
-                <input type="checkbox" data-ng-click="toggleSelect($event); $event.stopPropagation()"
-                    data-ng-checked="isSelected" id="{{elementId}}-{{row.author}}">
+              <li data-ng-repeat="row in data.items track by row.author"
+                  data-fh-table-row="row">
 
-                <label for="{{elementId}}-{{row.author}}" data-ng-click="$event.stopPropagation()">
+                <input type="checkbox"
+                    id="{{elementId}}-{{row.author}}"
+                    data-ng-checked="isSelected"
+                    data-ng-click="toggleSelect($event); $event.stopPropagation()">
+
+                <label for="{{elementId}}-{{row.author}}"
+                    data-ng-click="$event.stopPropagation()">
+
                   {{row.author}}
                 </label>
               </li>
