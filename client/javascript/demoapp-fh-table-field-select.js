@@ -75,6 +75,46 @@ app.controller('MainCtrl', [
             });
     }
 
+    fhtable.on('deleteItem', function deleteNote(event, item, options) {
+        fhtable.trigger('ajaxRequestStarted');
+
+        $http.delete(
+            '/rest/notes/' + item.id).then(
+                
+            function deleteNoteSuccess() {
+                fhtable.trigger('itemDeleted', item, options);
+
+                fhtable.trigger('ajaxRequestFinished');
+            },
+            function deleteNoteFailed(error) {
+                console.log(error);
+                fhtable.trigger('ajaxRequestFinished');
+            }
+        );
+    });
+
+    fhtable.on('updateItemData', function editNote(event, newItem, oldItem,
+            options) {
+
+        fhtable.trigger('ajaxRequestStarted');
+
+        $http.put(
+            '/rest/notes/' + oldItem.id,
+            newItem).then(
+
+            function editNoteSuccess(response) {
+                fhtable.trigger('itemDataUpdated', response.data, oldItem,
+                        options);
+
+                fhtable.trigger('ajaxRequestFinished');
+            },
+            function editNoteFailed(error) {
+                console.log(error);
+                fhtable.trigger('ajaxRequestFinished');
+            }
+        );
+    });
+
     //// scope functions
 
     // jQuery-infinite-scoll-helper didn't work when the html element with

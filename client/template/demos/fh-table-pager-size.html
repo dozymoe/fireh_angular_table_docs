@@ -5,24 +5,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
-<title>fhTablePagerSize Demo</title>
+<title>FhTablePagerSize Demo</title>
 
 <link rel="stylesheet" href="/scripts/vendor/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="/scripts/vendor/bootstrap/dist/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="/scripts/vendor/country-flags/css/flags.css">
 <link rel="stylesheet" href="/styles/app.css">
 
 <script src="/scripts/vendor/angular/angular.min.js"></script>
-<script src="/scripts/vendor/angular-route/angular-route.min.js"></script>
 <script src="/scripts/vendor/jquery/dist/jquery.min.js"></script>
 <script src="/scripts/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/scripts/vendor/lodash/dist/lodash.min.js"></script>
 <script src="/scripts/vendor/moment/min/moment.min.js"></script>
 <script src="/scripts/vendor/angular-moment/angular-moment.min.js"></script>
 
-<script src="/scripts/vendor/lodash/dist/lodash.min.js"></script>
 <script src="/scripts/vendor/fireh_angular_table/core.js"></script>
 <script src="/scripts/vendor/fireh_angular_table/core_mixins.js"></script>
 <script src="/scripts/vendor/fireh_angular_table/table.js"></script>
-<script src="/scripts/vendor/fireh_angular_table/table_pager.js"></script>
 <script src="/scripts/vendor/fireh_angular_table/table_pager_size.js"></script>
 
 <script src="/scripts/demoapp-fh-table-pager-size.js"></script>
@@ -33,7 +32,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <h1>fhTablePagerSize Demo</h1>
+      <h1>FhTablePagerSize Demo</h1>
 
       <p>View source and also take a look at this file
          <a href="/scripts/demoapp-fh-table-pager-size.js">
@@ -43,16 +42,6 @@
   </div>
 
   <div class="row">
-    <div class="col-md-12 text-right form-group">
-      <button data-ng-click="createNote()" class="btn btn-primary"
-          data-ng-disabled="isCreatingNote">
-
-        Create new Note
-      </button>
-    </div>
-  </div>
-
-  <div class="row" data-ng-hide="isCreatingNote">
     <div class="col-md-12">
       <div class="table-responsive">
         <table data-fh-table="tableSettings" class="table table-striped">
@@ -63,6 +52,7 @@
               <th>Title
               <th>Author
               <th>Content
+              <th>Country
               <th>Date Created
               <th>Date Modified
           </thead>
@@ -72,6 +62,9 @@
             <td>{{row.title}}
             <td>{{row.author}}
             <td>{{row.body}}
+            <td>
+              <i class="flag n-{{('0000' + row.country).slice(-3)}}"
+                  data-ng-show="row.country"></i>
             <td am-time-ago="row.created_at">
             <td am-time-ago="row.modified_at">
         </table>
@@ -79,8 +72,8 @@
     </div>
   </div>
 
-  <div class="row" data-ng-hide="isCreatingNote">
-    <div class="col-xs-5 col-sm-6 pagination-size">
+  <div class="row">
+    <div class="col-md-12 pagination-size">
       <div>
         Show
         <span data-fh-table-pager-size="tableSettings"
@@ -90,53 +83,20 @@
         entries per page
       </div>
     </div>
-
-    <div class="col-xs-7 col-sm-6 text-right pagination-container"
-        data-fh-table-pager="tableSettings"
-        data-fhp-pager-links-count="5">
-    </div>
   </div>
 
-  <div class="row ng-hide" data-ng-show="isCreatingNote">
+  <div class="row">
     <div class="col-md-12">
-      <form name="createNoteForm">
-        <div class="form-group">
-          <label for="edit-title">Title</label>
-          <input class="form-control" id="edit-title"
-              placeholder="Some title thingy"
-              data-ng-model="draft.title"
-              required
-              maxlength="50">
-        </div>
-
-        <div class="form-group">
-          <label for="edit-author">Author</label>
-          <input class="form-control" id="edit-author"
-              placeholder="Slim Shady"
-              data-ng-model="draft.author"
-              required
-              maxlength="50">
-        </div>
-
-        <div class="form-group">
-          <label for="edit-body">Content</label>
-          <textarea class="form-control" id="edit-body"
-              placeholder="This is a note!"
-              data-ng-model="draft.body"
-              maxlength="250">
-          </textarea>
-        </div>
-
-        <button class="btn btn-primary" data-ng-click="saveNote()"
-            data-ng-disabled="!createNoteForm.$valid">
-
-          Save
-        </button>
-
-        <button class="btn btn-cancel" data-ng-click="closeForm()">
-          Cancel
-        </button>
-      </form>
+      <nav>
+        <h2>Where to go from here?</h2>
+        <ol>
+          <li><a href="/#/widgets/fh-table-pager-size">FhTablePagerSize</a>
+          <li><a href="/#/widgets">All widgets</a>
+          <li><a href="/#/">Home</a>
+          <li><a href="https://github.com/dozymoe/fireh_angular_table">
+              Github repository</a>
+        </ol>
+      </nav>
     </div>
   </div>
 </div>

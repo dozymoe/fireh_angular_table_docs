@@ -4,7 +4,7 @@
     <ol>
       <li><a href="/#/">Home</a>
       <li><a href="/#/widgets">Widgets</a>
-      <li>FhTableRow
+      <li>FhForm
     </ol>
   </nav>
 </div>
@@ -12,48 +12,33 @@
 <div class="row">
   <div class="col-md-8">
 
-    <h1>FhTableRow</h1>
+    <h1>FhForm</h1>
 
-    <p>Allows you to interact with the data of each row, be it editing,
-       deletion, selection or other custom activities.
+    <p>This widget doesn't provide any html markup.
+
+    <p>Helps setting up draft and form-data, and related events.
 
 
     <h2>Angular Directive Parameters</h2>
 
     <ul>
       <li>
-        <strong>data-fh-table-row</strong> itself
+        <strong>data-fh-form</strong> itself
 
-        <p>Expected value, object, the row's data.
+        <p>Expected value, instance of <a href="/#/options">
+           FhTableDefinition</a>.
 
       <li>
         <strong>data-fhp-table</strong>
 
         <p>Expected value, instance of <a href="/#/options">
-           FhTableDefinition</a>, if it were not available from the
-           <code>$scope</code>.
+           FhTableDefinition</a>, if you haven't set one already with <code>
+           data-fh-form</code>.
 
       <li>
-        <strong>data-fhp-row-item</strong>
+          <strong>data-fhp-form-item</strong>
 
-        <p>Expected value, object, the row's data, if you haven't set one
-           already with <code>data-fh-table-row</code>.
-
-      <li>
-        <strong>data-fhp-editable</strong>
-
-        <p>Expected value, string (empty, 'true' or 'false'), required to enable
-           editing the row's data fields.
-        
-      <li>
-        <strong>data-fhp-editable-fields</strong>
-
-        <p>Expected value, string of comma delimited field names, white-listing
-           the fields that can be edited, so you don't accidentally submit
-           expired non-editable parts of the row's data.
-           
-        <p>In case you kept the draft for too long while the original data has
-           been changed somewhere else.
+          <p>Expected value, object, the form's data.
 
       <li>
         <strong>data-fhp-element-id</strong>
@@ -88,14 +73,19 @@
 
     <h2>Demo</h2>
 
-    <p><a href="/demos/fh-table-row.html">See FhTableRow demo</a>
+    <p><a href="/demos/fh-form.html">See FhForm demo</a>
+
+    <p>Notice that <a href="/#/widget-helpers/fhf-editable-field">
+       FhfEditableField</a> and <code>data-fhp-editable-fields</code> does the
+       same thing.
+
+    <p>The form has link to the table, when new Note was created new entry will
+       be created in the table.
 
 
     <h2>Widgets Requirement</h2>
 
-    <ol>
-      <li><a href="/#/widgets/fh-table">FhTable</a>
-    </ol>
+    <p>None
 
   </div>
 
@@ -126,17 +116,10 @@
               (possible override)
         </ul>
 
-      <li>
         <h3>Display Events</h3>
 
         <ul>
           <li><a href="/#/events/draft-updated">draftUpdated</a>
-              (possible override)
-
-          <li><a href="/#/events/editing-begin">editingBegin</a>
-              (possible override)
-
-          <li><a href="/#/events/editing-end">editingEnd</a>
               (possible override)
 
           <li><a href="/#/events/item-added">itemAdded</a>
@@ -147,14 +130,7 @@
 
           <li><a href="/#/events/item-deleted">itemDeleted</a>
               (possible override)
-
-          <li><a href="/#/events/item-deselected">itemDeselected</a>
-              (possible override)
-
-          <li><a href="/#/events/item-selected">itemSelected</a>
-              (possible override)
         </ul>
-
     </ul>
 
 
@@ -167,15 +143,12 @@
         <ul>
           <li><a href="/#/events/add-item">addItem</a>
           <li><a href="/#/events/delete-item">deleteItem</a>
-          <li><a href="/#/events/deselect-item">deselectItem</a>
           <li><a href="/#/events/draft-set-field">draftSetField</a>
           <li><a href="/#/events/reset-draft">resetDraft</a>
-          <li><a href="/#/events/select-item">selectItem</a>
           <li><a href="/#/events/update-form-data">updateFormData</a>
           <li><a href="/#/events/update-item-data">updateItemData</a>
         </ul>
 
-      <li>
         <h3>Display Events</h3>
 
         <ul>
@@ -185,6 +158,5 @@
           <li><a href="/#/events/form-data-updated">formDataUpdated</a>
         </ul>
     </ul>
-
   </nav>
 </div>

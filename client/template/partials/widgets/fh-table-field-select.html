@@ -101,6 +101,17 @@
 
         <p>Random numbers will be appended when the id was constructed, making
            the id unique.
+
+      <li>
+        <strong>data-fhp-middlewares</strong>
+
+        <p>Expected value, comma separated list of services names.
+
+      <li>
+        <strong>data-fhe-*</strong>
+
+        <p>Custom event handler if you wanted to change this widget behaviour.
+
     </ul>
 
 
@@ -111,6 +122,10 @@
 
     <p>Notice that <code>data-fhp-editable</code> attribute is added to element
        with <code>data-fh-table-row</code>, otherwise this widget wouldn't work.
+
+    <p>Notice that <code>data-fhp-editable-fields</code> attribute is redundant,
+       because this widget would automatically add "country" to the list of
+       white-listed editable fields.
 
     <p>This demo uses <a href="/#/widgets/fh-infinite-scroll">
        FhInfiniteScroll</a> so you can scroll down the list of country flags.
@@ -237,6 +252,7 @@
         <h3>Action Events</h3>
 
         <ul>
+          <li><a href="/#/events/add-editable-field">addEditableField</a>
           <li><a href="/#/events/draft-set-field">draftSetField</a>
           <li><a href="/#/events/draft-unset-field">draftUnsetField</a>
         </ul>

@@ -10,15 +10,16 @@
 <link rel="stylesheet" href="/scripts/vendor/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="/scripts/vendor/bootstrap/dist/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="/scripts/vendor/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/scripts/vendor/country-flags/css/flags.css">
 <link rel="stylesheet" href="/styles/app.css">
 
 <script src="/scripts/vendor/angular/angular.min.js"></script>
 <script src="/scripts/vendor/jquery/dist/jquery.min.js"></script>
 <script src="/scripts/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/scripts/vendor/lodash/dist/lodash.min.js"></script>
 <script src="/scripts/vendor/moment/min/moment.min.js"></script>
 <script src="/scripts/vendor/angular-moment/angular-moment.min.js"></script>
 
-<script src="/scripts/vendor/lodash/dist/lodash.min.js"></script>
 <script src="/scripts/vendor/fireh_angular_table/core.js"></script>
 <script src="/scripts/vendor/fireh_angular_table/core_mixins.js"></script>
 <script src="/scripts/vendor/fireh_angular_table/table.js"></script>
@@ -49,6 +50,7 @@
               <th>Title
               <th>Author
               <th>Content
+              <th>Country
               <th>Date Created
               <th>Date Modified
           </thead>
@@ -58,6 +60,9 @@
             <td>{{row.title}}
             <td>{{row.author}}
             <td>{{row.body}}
+            <td>
+              <i class="flag n-{{('0000' + row.country).slice(-3)}}"
+                  data-ng-show="row.country"></i>
             <td am-time-ago="row.created_at">
             <td am-time-ago="row.modified_at">
         </table>

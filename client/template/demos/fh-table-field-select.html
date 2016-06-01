@@ -63,7 +63,8 @@
           </thead>
 
           <tr data-ng-repeat="row in data.items track by row.id"
-              data-fh-table-row="row" data-fhp-editable>
+              data-fh-table-row="row" data-fhp-editable
+              data-fhp-editable-fields="country">
 
             <td>{{row.id}}
             <td>{{row.title}}

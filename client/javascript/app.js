@@ -40,6 +40,13 @@ app.config(['$routeProvider', function($router) {
             }
         })
 
+        .when('/widgets/fh-form', {
+            templateUrl: '/partials/widgets/fh-form.html',
+            controller: function() {
+                document.title = 'FhForm widget | FirehAngularTable';
+            }
+        })
+
         .when('/widgets/fh-form-field-select', {
             templateUrl: '/partials/widgets/fh-form-field-select.html',
             controller: function() {
