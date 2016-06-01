@@ -12,14 +12,113 @@
 <div class="row">
   <div class="col-md-8">
 
-    <h2>FhTableSorting</h2>
+    <h1>FhTableSorting</h1>
 
-    <p><a href="/demos/fh-table-sorting.html">See fhTableSorting demo</a>
+
+    <h2>Angular Directive Parameters</h2>
+
+    <ul>
+      <li>
+        <strong>data-fh-table-sorting</strong> itself
+
+        <p>Expected value, string, the sort-by field's name.
+
+      <li>
+        <strong>data-fhp-name</strong>
+
+        <p>Expected value, string, the sort-by field's name, if you haven't set
+           one already with <code>data-fh-table-sorting</code>.
+
+      <li>
+        <strong>data-fhp-table</strong>
+
+        <p>Expected value, instance of <a href="/#/options">
+           FhTableDefinition</a>, if the widget was outside the scope of
+           <a href="/#/widgets/fh-table-row">FhTableRow</a> but that is very
+           unlikely.
+
+      <li>
+        <strong>data-fhp-template-url</strong>
+
+        <p>Expected value, string of url to partial html, with this you can
+           override the template html used by the widget.
+
+        <p>The widget uses
+           <a href="https://docs.angularjs.org/api/ng/service/$templateRequest">
+           Angular $templateRequest</a> on the value.
+
+      <li>
+        <strong>data-fhp-element-id</strong>
+
+        <p>Expected value, string, form elements usually have <code>id</code>
+           attribute set, for example to link &lt;label&gt; with the element
+           itself.
+
+        <p>If you don't set one, a random element-id will be assigned.
+
+      <li>
+        <strong>data-fhp-element-name</strong>
+
+        <p>Expected value, string, the alphabets part of random element-id, the
+           priority is lower than value set in <code>data-fhp-element-id</code>.
+
+        <p>Random numbers will be appended when the id was constructed, making
+           the id unique.
+
+      <li>
+        <strong>data-fhp-middlewares</strong>
+
+        <p>Expected value, comma separated list of services names.
+
+      <li>
+        <strong>data-fhe-*</strong>
+
+        <p>Custom event handler if you wanted to change this widget behaviour.
+
+    </ul>
+
+
+    <h2>Demo</h2>
+
+    <p><a href="/demos/fh-table-sorting.html">See FhTableSorting demo</a>
+
+
+    <h2>Widgets Requirement</h2>
+
+    <ol>
+      <li><a href="/#/widgets/fh-table">FhTable</a>
+    </ol>
 
   </div>
 
   <nav class="sidebar-navigation col-md-3 col-md-push-1">
     <h2>See Also</h2>
+
     <div data-ng-include="'/partials/widgets-see-also.html'"></div>
+
+
+    <h2>Events Listened</h2>
+
+    <ul>
+      <li>
+        <h3>Display Events</h3>
+
+        <ul>
+          <li><a href="/#/events/order-updated">orderUpdated</a>
+              (possible override)
+        </ul>
+    </ul>
+
+
+    <h2>Events Triggered</h2>
+
+    <ul>
+      <li>
+        <h3>Action Events</h3>
+
+        <ul>
+          <li><a href="/#/events/set-order">setOrder</a>
+        </ul>
+    </ul>
   </nav>
 </div>

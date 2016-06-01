@@ -37,8 +37,9 @@ app.controller('MainCtrl', [
 
             function itemGetSuccess(response) {
                 _.forEach(response.data.items, function(item) {
-                   item.created_at = new moment(item.created_at);
-                   item.modified_at = new moment(item.modified_at);
+                    item.country = {id: item.country};
+                    item.created_at = new moment(item.created_at);
+                    item.modified_at = new moment(item.modified_at);
                 });
                 return response.data;
             });

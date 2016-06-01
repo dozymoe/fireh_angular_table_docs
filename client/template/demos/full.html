@@ -34,6 +34,7 @@
 <script src="/scripts/vendor/fireh_angular_table/table_batch_actions.js"></script>
 <script src="/scripts/vendor/fireh_angular_table/table_field_select.js"></script>
 <script src="/scripts/vendor/fireh_angular_table/form.js"></script>
+<script src="/scripts/vendor/fireh_angular_table/form_helpers.js"></script>
 <script src="/scripts/vendor/fireh_angular_table/form_field_select.js"></script>
 <script src="/scripts/vendor/fireh_angular_table/middlewares.js"></script>
 
@@ -146,9 +147,7 @@
     </div>
 
     <div class="col-md-2 text-right form-group">
-      <button data-ng-click="createNote()" class="btn btn-primary"
-          data-ng-disabled="isCreatingNote">
-
+      <button data-ng-click="createNote()" class="btn btn-primary">
         Create new Note
       </button>
     </div>
@@ -213,21 +212,24 @@
                 data-ng-class="{'info': modifiedFields.title}">
 
               <input type="text" data-ng-model="draft.title"
-                  class="form-control" data-ng-change="triggerDraftUpdated()">
+                  class="form-control" data-ng-change="triggerDraftUpdated()"
+                  data-fhf-editable-field="title">
 
             <td data-ng-if="!isEditing">{{row.author}}
             <td data-ng-if="isEditing"
                 data-ng-class="{'info': modifiedFields.author}">
 
               <input type="text" data-ng-model="draft.author"
-                  class="form-control" data-ng-change="triggerDraftUpdated()">
+                  class="form-control" data-ng-change="triggerDraftUpdated()"
+                  data-fhf-editable-field="author">
 
             <td data-ng-if="!isEditing">{{row.body}}
             <td data-ng-if="isEditing"
                 data-ng-class="{'info': modifiedFields.body}">
 
               <textarea data-ng-model="draft.body" class="form-control"
-                  data-ng-change="triggerDraftUpdated()"></textarea>
+                  data-ng-change="triggerDraftUpdated()"
+                  data-fhf-editable-field="body"></textarea>
 
             <td data-ng-if="!isEditing">
               <i class="flag n-{{('0000' + row.country).slice(-3)}}"
@@ -241,7 +243,8 @@
                   data-fhp-table-row="row" class="form-group select-country">
 
                 <span data-fh-transclude-pane="caption">
-                  <i class="flag n-{{('0000' + draft.country).slice(-3)}}"></i>
+                  <i class="flag n-{{('0000' + draft.country.id).slice(-3)}}"
+                      data-ng-if="draft.country"></i>
                 </span>
 
                 <div data-fh-transclude-pane="popup">
@@ -337,6 +340,7 @@
             <input class="form-control" id="edit-title"
                 placeholder="Some title thingy"
                 data-ng-model="draft.title"
+                data-fhf-editable-field="title"
                 required
                 maxlength="50">
           </div>
@@ -346,6 +350,7 @@
             <input class="form-control" id="edit-author"
                 placeholder="Slim Shady"
                 data-ng-model="draft.author"
+                data-fhf-editable-field="author"
                 required
                 maxlength="50">
           </div>
@@ -355,6 +360,7 @@
             <textarea class="form-control" id="edit-body"
                 placeholder="This is a note!"
                 data-ng-model="draft.body"
+                data-fhf-editable-field="body"
                 maxlength="250">
             </textarea>
           </div>
@@ -363,11 +369,14 @@
             <div data-fh-form-field-select="country" data-fhp-single-selection
                 data-fhp-form-id="edit-country" class="select-country">
 
-              <label data-fh-transclude-pane="header" for="{{ elementId }}">Country</label>
+              <label data-fh-transclude-pane="header" for="{{elementId}}">
+                Country
+              </label>
 
               <span data-fh-transclude-pane="caption">
-                <i class="flag n-{{('0000' + draft.country).slice(-3)}}"
-                  data-ng-if="draft.country"></i>
+                <i class="flag n-{{('0000' + draft.country.id).slice(-3)}}"
+                    data-ng-if="draft.country"></i>
+
                 <span data-ng-if="!draft.country">Select Country</span>
               </span>
 
@@ -376,7 +385,9 @@
                     data-fh-transcluded="data-fh-infinite-scroll"
                     data-fhp-init-callback="infiniteScrollPopupInit">
 
-                  <li data-ng-repeat="row in data.items track by row.id" data-fh-table-row="row">
+                  <li data-ng-repeat="row in data.items track by row.id"
+                      data-fh-table-row="row">
+
                     <button type="button" class="btn btn-default">
                       <i class="flag n-{{('0000' + row.id).slice(-3)}}"></i>
                       {{row.name}}

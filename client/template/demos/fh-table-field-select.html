@@ -72,8 +72,8 @@
             <td>{{row.body}}
 
             <td data-ng-if="!isEditing">
-              <i class="flag n-{{('0000' + row.country).slice(-3)}}"
-                data-ng-show="row.country"></i>
+              <i class="flag n-{{('0000' + row.country.id).slice(-3)}}"
+                data-ng-if="row.country"></i>
 
             <td data-ng-if="isEditing"
                 data-ng-class="{'info': modifiedFields.country}">
@@ -83,7 +83,8 @@
                   data-fhp-table-row="row" class="form-group select-country">
 
                 <span data-fh-transclude-pane="caption">
-                  <i class="flag n-{{('0000' + draft.country).slice(-3)}}"></i>
+                  <i class="flag n-{{('0000' + draft.country.id).slice(-3)}}"
+                      data-ng-if="draft.country"></i>
                 </span>
 
                 <div data-fh-transclude-pane="popup">

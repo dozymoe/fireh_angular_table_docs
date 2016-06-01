@@ -5,7 +5,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
-<title>fhFormFieldSelect Demo</title>
+<title>FhFormFieldSelect Demo</title>
 
 <link rel="stylesheet" href="/scripts/vendor/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="/scripts/vendor/bootstrap/dist/css/bootstrap-theme.min.css">
@@ -13,9 +13,7 @@
 <link rel="stylesheet" href="/scripts/vendor/country-flags/css/flags.css">
 <link rel="stylesheet" href="/styles/app.css">
 
-<!--script src="/scripts/vendor/angular/angular.min.js"></script-->
-<script src="/scripts/vendor/angular/angular.js"></script>
-<script src="/scripts/vendor/angular-route/angular-route.min.js"></script>
+<script src="/scripts/vendor/angular/angular.min.js"></script>
 <script src="/scripts/vendor/jquery/dist/jquery.min.js"></script>
 <script src="/scripts/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="/scripts/vendor/lodash/dist/lodash.min.js"></script>
@@ -26,16 +24,10 @@
 <script src="/scripts/vendor/fireh_angular_table/core.js"></script>
 <script src="/scripts/vendor/fireh_angular_table/core_mixins.js"></script>
 <script src="/scripts/vendor/fireh_angular_table/table.js"></script>
-<script src="/scripts/vendor/fireh_angular_table/table_pager.js"></script>
-<script src="/scripts/vendor/fireh_angular_table/table_pager_size.js"></script>
-<script src="/scripts/vendor/fireh_angular_table/table_sorting.js"></script>
-<script src="/scripts/vendor/fireh_angular_table/table_filter_text.js"></script>
 <script src="/scripts/vendor/fireh_angular_table/table_row.js"></script>
 <script src="/scripts/vendor/fireh_angular_table/infinite_scroll.js"></script>
-<script src="/scripts/vendor/fireh_angular_table/table_filter_select.js"></script>
-<script src="/scripts/vendor/fireh_angular_table/table_batch_actions.js"></script>
-<script src="/scripts/vendor/fireh_angular_table/table_field_select.js"></script>
 <script src="/scripts/vendor/fireh_angular_table/form.js"></script>
+<script src="/scripts/vendor/fireh_angular_table/form_helpers.js"></script>
 <script src="/scripts/vendor/fireh_angular_table/form_field_select.js"></script>
 
 <script src="/scripts/demoapp-fh-form-field-select.js"></script>
@@ -46,7 +38,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <h1>fhFormFieldSelect Demo</h1>
+      <h1>FhFormFieldSelect Demo</h1>
 
       <p>View source and also take a look at this file
          <a href="/scripts/demoapp-fh-form-field-select.js">
@@ -56,96 +48,10 @@
   </div>
 
   <div class="row" data-ng-hide="isCreatingNote">
-    <div class="col-md-10">
-      <form class="form-inline">
-        <div data-fh-table-filter-text="title" data-fhp-params="tableSettings"
-            data-fhp-placeholder="{{'title to search for'}}"
-            class="form-group"></div>
-
-        <div data-fh-table-filter-select="country" data-fhp-params="tableSettings"
-            class="form-group select-country">
-
-          <span data-fh-transclude-pane="label">Select Country</span>
-
-          <div data-fh-transclude-pane="content"><div>
-            <ul class="list-unstyled" data-ng-if="data.selectedItems.length">
-              <li data-ng-repeat="row in data.selectedItems track by row.id" data-fh-table-row="row">
-                <input type="checkbox" data-ng-click="toggleSelect($event); $event.stopPropagation()"
-                    checked>
-
-                <i class="flag n-{{('0000' + row.id).slice(-3)}}"></i>
-                {{row.name}}
-              </li>
-            </ul>
-
-            <ul class="list-unstyled"
-                data-fh-transcluded="data-fh-infinite-scroll"
-                data-fhp-init-callback="infiniteScrollPopupInit">
-
-              <li data-ng-repeat="row in data.items track by row.id" data-fh-table-row="row">
-                <div data-ng-if="!isSelected">
-                  <input type="checkbox" data-ng-click="toggleSelect($event); $event.stopPropagation()">
-                  <i class="flag n-{{('0000' + row.id).slice(-3)}}"></i>
-                  {{row.name}}
-                </div>
-              </li>
-            </ul>
-          </div></div>
-        </div>
-
-        <div data-fh-table-filter-select="author" data-fhp-params="tableSettings"
-            class="form-group select-author">
-
-          <span data-fh-transclude-pane="label">Select Author</span>
-
-          <div data-fh-transclude-pane="content"><div>
-            <div data-fh-transcluded="data-fh-table-filter-text" data-fhp-name="author"
-                data-fhp-placeholder="{{'author to search for'}}"
-                class="form-group"></div>
-
-            <ul class="list-unstyled"
-                data-fh-transcluded="data-fh-infinite-scroll"
-                data-fhp-init-callback="infiniteScrollPopupInit">
-
-              <li data-ng-repeat="row in data.items track by row.author" data-fh-table-row="row">
-                <input type="checkbox" data-ng-click="toggleSelect($event); $event.stopPropagation()"
-                    data-ng-checked="isSelected">
-                {{row.author}}
-              </li>
-            </ul>
-          </div></div>
-        </div>
-      </form>
-    </div>
-
-    <div class="col-md-2 text-right form-group">
-      <button data-ng-click="createNote()" class="btn btn-primary"
-          data-ng-disabled="isCreatingNote">
-
+    <div class="col-md-12 text-right form-group">
+      <button data-ng-click="createNote()" class="btn btn-primary">
         Create new Note
       </button>
-    </div>
-  </div>
-
-  <div class="row" data-ng-hide="isCreatingNote">
-    <div class="col-md-12">
-      <form class="form-inline">
-        <div class="form-group" data-fh-table-batch-actions="tableSettings">
-          <select data-ng-model="data.actionName" class="form-control">
-            <option value="">----------
-            <option value="touch">Update last modified timestamp
-            <option value="delete">Delete
-          </select>
-
-          <button class="form-control btn btn-default" data-ng-click="execute()"
-              data-ng-disabled="!data.selectedItems.length || !data.actionName">
-
-            Go
-          </button>
-
-          {{data.selectedItems.length}} of {{data.total}} selected.
-        </div>
-      </form>
     </div>
   </div>
 
@@ -156,124 +62,43 @@
 
           <thead>
             <tr>
-              <th>
-                <input type="checkbox" data-ng-click="toggleSelectAll($event)"
-                    data-ng-checked="isAllSelected">
-
-              <th>Id <div data-fh-table-sorting="id"></div>
-              <th>Title <div data-fh-table-sorting="title"></div>
-              <th>Author <div data-fh-table-sorting="author"></div>
+              <th>Id
+              <th>Title
+              <th>Author
               <th>Content
               <th>Country
-              <th>Date Created <div data-fh-table-sorting="created_at"></div>
+              <th>Date Created
               <th>Date Modified
-              <th>Actions
           </thead>
 
-          <tr data-ng-repeat="row in data.items track by row.id" data-fh-table-row="row"
-              data-fhp-data-type="note">
-
-            <td>
-              <input type="checkbox" data-ng-click="toggleSelect($event)" data-ng-checked="isSelected">
+          <tr data-ng-repeat="row in data.items track by row.id">
             <td>{{row.id}}
-            <td data-ng-class="{'info': isFieldModified('title')}">
-              <span data-ng-if="!isEditing">{{row.title}}</span>
-              <input data-ng-if="isEditing" data-ng-model="draft.title" class="form-control">
-
-            <td data-ng-class="{'info': isFieldModified('author')}">
-              <span data-ng-if="!isEditing">{{row.author}}</span>
-              <input data-ng-if="isEditing" data-ng-model="draft.author" class="form-control">
-
-            <td data-ng-class="{'info': isFieldModified('body')}">
-              <div data-ng-if="!isEditing">{{row.body}}</div>
-              <textarea data-ng-if="isEditing" data-ng-model="draft.body" class="form-control"></textarea>
-
-            <td data-ng-class="{'info': isFieldModified('country')}">
-              <div data-ng-if="!isEditing">
-                <i class="flag n-{{('0000' + row.country).slice(-3)}}" data-ng-show="row.country"></i>
-              </div>
-
-              <div data-ng-if="isEditing" data-fh-table-field-select="country" data-fhp-single-selection
-                  data-fhp-table-row="row" class="form-group select-country">
-
-                <span data-fh-transclude-pane="label">
-                  <i class="flag n-{{('0000' + draft.country).slice(-3)}}"></i>
-                </span>
-
-                <div data-fh-transclude-pane="content">
-                  <ul class="list-unstyled"
-                      data-fh-transcluded="data-fh-infinite-scroll"
-                      data-fhp-init-callback="infiniteScrollModalInit">
-
-                    <li data-ng-repeat="row in data.items track by row.id" data-fh-table-row="row">
-                      <button data-ng-click="select()">
-                        <i class="flag n-{{('0000' + row.id).slice(-3)}}"></i>
-                        {{row.name}}
-                      </button>
-                    </li>
-                  </ul>
-                </div>
-
-                <div data-fh-transclude-pane="footer" class="modal-footer">
-                  <button class="btn btn-primary" data-dismiss="modal">Close</button>
-                </div>
-              </div>
+            <td>{{row.title}}
+            <td>{{row.author}}
+            <td>{{row.body}}
+            <td>
+              <i class="flag n-{{('0000' + row.country.id).slice(-3)}}"
+                  data-ng-if="row.country"></i>
 
             <td am-time-ago="row.created_at">
             <td am-time-ago="row.modified_at">
-            <td>
-              <span style="white-space:nowrap">
-                <button ng-if="isEditing" ng-click="save()" class="btn btn-success">
-                  <i class="glyphicon glyphicon-ok" title="{{ 'Save' }}"></i>
-                </button>
-
-                <button ng-if="isEditing" ng-click="cancel()" class="btn btn-danger">
-                  <i class="glyphicon glyphicon-remove" title="{{ 'Cancel' }}"></i>
-                </button>
-
-                <button ng-if="!isEditing" ng-click="edit()" class="btn btn-default">
-                  <i class="glyphicon glyphicon-pencil" title="{{ 'Edit' }}"></i>
-                </button>
-
-                <button ng-if="!isEditing" ng-click="delete()" class="btn btn-default">
-                  <i class="glyphicon glyphicon-trash" title="{{ 'Delete' }}"></i>
-                </button>
-              </span>
-            </td>
         </table>
       </div>
-    </div>
-  </div>
-
-  <div class="row" data-ng-hide="isCreatingNote">
-    <div class="col-xs-5 col-sm-6 pagination-size">
-      <div>
-        Show
-        <span data-fh-table-pager-size="tableSettings"
-            data-fhp-pager-sizes="5,10,20,50,100"
-            data-fhp-default-pager-size="5"></span>
-
-        entries per page
-      </div>
-    </div>
-
-    <div class="col-xs-7 col-sm-6 text-right pagination-container"
-        data-fh-table-pager="tableSettings"
-        data-fhp-pager-links-count="5">
     </div>
   </div>
 
   <div class="row ng-hide" data-ng-show="isCreatingNote">
     <div class="col-md-12">
       <form name="createNoteForm">
-        <div data-fh-form="createNoteForm" data-fhp-data-type="note"
-            data-fhp-params="tableSettings">
+        <div data-fh-form="tableSettings" data-fhp-form-id="createNoteForm"
+            data-fhp-editable-fields="title,author,body,country">
 
           <div class="form-group">
             <label for="edit-title">Title</label>
             <input class="form-control" id="edit-title"
                 placeholder="Some title thingy"
                 data-ng-model="draft.title"
+                data-fhf-editable-field="title"
                 required
                 maxlength="50">
           </div>
@@ -283,6 +108,7 @@
             <input class="form-control" id="edit-author"
                 placeholder="Slim Shady"
                 data-ng-model="draft.author"
+                data-fhf-editable-field="author"
                 required
                 maxlength="50">
           </div>
@@ -292,38 +118,44 @@
             <textarea class="form-control" id="edit-body"
                 placeholder="This is a note!"
                 data-ng-model="draft.body"
+                data-fhf-editable-field="body"
                 maxlength="250">
             </textarea>
           </div>
 
-          <div class="form-group">
-            <label for="edit-body">Country</label>
-            <div data-fh-form-field-select="country" data-fhp-single-selection
-                class="select-country">
+          <div data-fh-form-field-select="country" data-fhp-single-selection
+              data-fhp-form-id="edit-country" class="select-country form-group">
 
-              <span data-fh-transclude-pane="label">
-                <i class="flag n-{{('0000' + draft.country).slice(-3)}}"
+            <label data-fh-transclude-pane="header" for="{{elementId}}">
+              Country
+            </label>
+              
+            <span data-fh-transclude-pane="caption">
+              <i class="flag n-{{('0000' + draft.country.id).slice(-3)}}"
                   data-ng-if="draft.country"></i>
-                <span data-ng-if="!draft.country">Select Country</span>
-              </span>
 
-              <div data-fh-transclude-pane="content">
-                <ul class="list-unstyled"
-                    data-fh-transcluded="data-fh-infinite-scroll"
-                    data-fhp-init-callback="infiniteScrollModalInit">
+              <span data-ng-if="!draft.country">Select Country</span>
+            </span>
 
-                  <li data-ng-repeat="row in data.items track by row.id" data-fh-table-row="row">
-                    <button data-ng-click="select()">
-                      <i class="flag n-{{('0000' + row.id).slice(-3)}}"></i>
-                      {{row.name}}
-                    </button>
-                  </li>
-                </ul>
-              </div>
+            <div data-fh-transclude-pane="popup">
+              <ul class="list-unstyled"
+                  data-fh-transcluded="data-fh-infinite-scroll"
+                  data-fhp-init-callback="infiniteScrollPopupInit">
 
-              <div data-fh-transclude-pane="footer" class="modal-footer">
-                <button class="btn btn-primary" data-dismiss="modal">Close</button>
-              </div>
+                <li data-ng-repeat="row in data.items track by row.id"
+                    data-fh-table-row="row">
+
+                  <input type="checkbox" class="hidden"
+                      id="{{elementId}}-{{row.id}}"
+                      data-ng-click="toggleSelect($event)"
+                      data-ng-checked="isSelected">
+
+                  <label for="{{elementId}}-{{row.id}}">
+                    <i class="flag n-{{('0000' + row.id).slice(-3)}}"></i>
+                    {{row.name}}
+                  </label>
+                </li>
+              </ul>
             </div>
           </div>
 
@@ -340,4 +172,21 @@
       </form>
     </div>
   </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <nav>
+        <h2>Where to go from here?</h2>
+        <ol>
+          <li><a href="/#/widgets/fh-form-field-select">FhFormFieldSelect</a>
+          <li><a href="/#/widgets">Widgets</a>
+          <li><a href="/#/">Home</a>
+          <li><a href="https://github.com/dozymoe/fireh_angular_table">
+              Github repository</a>
+        </ol>
+      </nav>
+    </div>
+  </div>
+</div>
+</div>
 </div>

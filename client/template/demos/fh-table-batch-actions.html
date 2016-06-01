@@ -97,8 +97,8 @@
             <td>{{row.author}}
             <td>{{row.body}}
             <td>
-              <i class="flag n-{{('0000' + row.country).slice(-3)}}"
-                  data-ng-show="row.country"></i>
+              <i class="flag n-{{('0000' + row.country.id).slice(-3)}}"
+                  data-ng-if="row.country"></i>
 
             <td am-time-ago="row.created_at">
             <td am-time-ago="row.modified_at">

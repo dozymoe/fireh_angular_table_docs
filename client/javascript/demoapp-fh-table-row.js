@@ -19,7 +19,7 @@ app.controller('MainCtrl', [
             getter: itemsGetter,
             identifierFields: 'id',
             page: 1,
-            pageSize: 5
+            pageSize: 20
         },
         orderBy: [['created_at', 'desc']]
     });
@@ -36,6 +36,7 @@ app.controller('MainCtrl', [
 
             function itemsGetSuccess(response) {
                 _.forEach(response.data.items, function(item) {
+                    item.country = {id: item.country};
                     item.created_at = new moment(item.created_at);
                     item.modified_at = new moment(item.modified_at);
                 });
@@ -61,18 +62,30 @@ app.controller('MainCtrl', [
         );
     });
 
-    fhtable.on('updateItemData', function editNote(event, newItem, oldItem,
+    fhtable.on('updateItemData', function editNote(event, draft, item,
             options) {
+
+        var submission = _.clone(draft);
+
+        // might be better if we were to use _.isObject() here
+        if (submission.country) {
+            submission.country = submission.country.id;
+        }
+        submission.modified_at = new moment();
 
         fhtable.trigger('ajaxRequestStarted');
 
         $http.put(
-            '/rest/notes/' + oldItem.id,
-            newItem).then(
+            '/rest/notes/' + item.id,
+            submission).then(
 
             function editNoteSuccess(response) {
-                fhtable.trigger('itemDataUpdated', response.data, oldItem,
-                        options);
+                var data = _.cloneDeep(response.data);
+                data.country = {id: data.country};
+                data.created_at = new moment(data.created_at);
+                data.modified_at = new moment(data.modified_at);
+                
+                fhtable.trigger('itemDataUpdated', data, item, options);
 
                 fhtable.trigger('ajaxRequestFinished');
             },

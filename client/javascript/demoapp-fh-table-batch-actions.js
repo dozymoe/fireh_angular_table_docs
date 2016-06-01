@@ -19,7 +19,7 @@ app.controller('MainCtrl', [
             getter: itemsGetter,
             identifierFields: 'id',
             page: 1,
-            pageSize: 5
+            pageSize: 20
         },
         orderBy: [['created_at', 'desc']]
     });
@@ -52,12 +52,11 @@ app.controller('MainCtrl', [
         var now = new moment();
 
         _.forEach(items, function(item) {
-            var newItem;
-
             if (name === 'touch') {
-                newItem = _.cloneDeep(item);
-                item.modified_at = now;
-                fhtable.trigger('updateItemData', newItem, item, options);
+                var draft = _.cloneDeep(item);
+                draft.modified_at = now;
+
+                fhtable.trigger('updateItemData', draft, item, options);
             } else if (name === 'delete') {
                 fhtable.trigger('deleteItem', item, options);
             }

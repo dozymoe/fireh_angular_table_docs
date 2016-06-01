@@ -5,26 +5,24 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
-<title>fhTableSorting Demo</title>
+<title>FhTableSorting Demo</title>
 
 <link rel="stylesheet" href="/scripts/vendor/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="/scripts/vendor/bootstrap/dist/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="/scripts/vendor/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/scripts/vendor/country-flags/css/flags.css">
 <link rel="stylesheet" href="/styles/app.css">
 
 <script src="/scripts/vendor/angular/angular.min.js"></script>
-<script src="/scripts/vendor/angular-route/angular-route.min.js"></script>
 <script src="/scripts/vendor/jquery/dist/jquery.min.js"></script>
 <script src="/scripts/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/scripts/vendor/lodash/dist/lodash.min.js"></script>
 <script src="/scripts/vendor/moment/min/moment.min.js"></script>
 <script src="/scripts/vendor/angular-moment/angular-moment.min.js"></script>
 
-<script src="/scripts/vendor/lodash/dist/lodash.min.js"></script>
 <script src="/scripts/vendor/fireh_angular_table/core.js"></script>
 <script src="/scripts/vendor/fireh_angular_table/core_mixins.js"></script>
 <script src="/scripts/vendor/fireh_angular_table/table.js"></script>
-<script src="/scripts/vendor/fireh_angular_table/table_pager.js"></script>
-<script src="/scripts/vendor/fireh_angular_table/table_pager_size.js"></script>
 <script src="/scripts/vendor/fireh_angular_table/table_sorting.js"></script>
 
 <script src="/scripts/demoapp-fh-table-sorting.js"></script>
@@ -35,7 +33,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <h1>fhTableSorting Demo</h1>
+      <h1>FhTableSorting Demo</h1>
 
       <p>View source and also take a look at this file
          <a href="/scripts/demoapp-fh-table-sorting.js">
@@ -45,16 +43,6 @@
   </div>
 
   <div class="row">
-    <div class="col-md-12 text-right form-group">
-      <button data-ng-click="createNote()" class="btn btn-primary"
-          data-ng-disabled="isCreatingNote">
-
-        Create new Note
-      </button>
-    </div>
-  </div>
-
-  <div class="row" data-ng-hide="isCreatingNote">
     <div class="col-md-12">
       <div class="table-responsive">
         <table data-fh-table="tableSettings" class="table table-striped">
@@ -65,6 +53,7 @@
               <th>Title <div data-fh-table-sorting="title"></div>
               <th>Author <div data-fh-table-sorting="author"></div>
               <th>Content
+              <th>Country
               <th>Date Created <div data-fh-table-sorting="created_at"></div>
               <th>Date Modified
           </thead>
@@ -74,6 +63,10 @@
             <td>{{row.title}}
             <td>{{row.author}}
             <td>{{row.body}}
+            <td>
+              <i class="flag n-{{('0000' + row.country.id).slice(-3)}}"
+                  data-ng-if="row.country"></i>
+
             <td am-time-ago="row.created_at">
             <td am-time-ago="row.modified_at">
         </table>
@@ -81,64 +74,19 @@
     </div>
   </div>
 
-  <div class="row" data-ng-hide="isCreatingNote">
-    <div class="col-xs-5 col-sm-6 pagination-size">
-      <div>
-        Show
-        <span data-fh-table-pager-size="tableSettings"
-            data-fhp-pager-sizes="5,10,20,50,100"
-            data-fhp-default-pager-size="5"></span>
-
-        entries per page
-      </div>
-    </div>
-
-    <div class="col-xs-7 col-sm-6 text-right pagination-container"
-        data-fh-table-pager="tableSettings"
-        data-fhp-pager-links-count="5">
-    </div>
-  </div>
-
-  <div class="row ng-hide" data-ng-show="isCreatingNote">
+  <div class="row">
     <div class="col-md-12">
-      <form name="createNoteForm">
-        <div class="form-group">
-          <label for="edit-title">Title</label>
-          <input class="form-control" id="edit-title"
-              placeholder="Some title thingy"
-              data-ng-model="draft.title"
-              required
-              maxlength="50">
-        </div>
-
-        <div class="form-group">
-          <label for="edit-author">Author</label>
-          <input class="form-control" id="edit-author"
-              placeholder="Slim Shady"
-              data-ng-model="draft.author"
-              required
-              maxlength="50">
-        </div>
-
-        <div class="form-group">
-          <label for="edit-body">Content</label>
-          <textarea class="form-control" id="edit-body"
-              placeholder="This is a note!"
-              data-ng-model="draft.body"
-              maxlength="250">
-          </textarea>
-        </div>
-
-        <button class="btn btn-primary" data-ng-click="saveNote()"
-            data-ng-disabled="!createNoteForm.$valid">
-
-          Save
-        </button>
-
-        <button class="btn btn-cancel" data-ng-click="closeForm()">
-          Cancel
-        </button>
-      </form>
+      <nav>
+        <h2>Where to go from here?</h2>
+        <ol>
+          <li><a href="/#/widgets/fh-table-sorting">FhTableSorting</a>
+          <li><a href="/#/widgets">Widgets</a>
+          <li><a href="/#/">Home</a>
+          <li><a href="https://github.com/dozymoe/fireh_angular_table">
+              Github repository</a>
+        </ol>
+      </nav>
     </div>
   </div>
+</div>
 </div>

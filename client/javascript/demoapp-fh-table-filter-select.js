@@ -36,7 +36,7 @@ app.controller('MainCtrl', [
             getter: itemsGetter,
             identifierFields: 'id',
             page: 1,
-            pageSize: 5
+            pageSize: 20
         },
         orderBy: [['created_at', 'desc']]
     });
@@ -54,6 +54,7 @@ app.controller('MainCtrl', [
 
             function itemsGetSuccess(response) {
                 _.forEach(response.data.items, function(item) {
+                    item.country = {id: item.country};
                     item.created_at = new moment(item.created_at);
                     item.modified_at = new moment(item.modified_at);
                 });
