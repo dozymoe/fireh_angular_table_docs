@@ -388,10 +388,16 @@
                   <li data-ng-repeat="row in data.items track by row.id"
                       data-fh-table-row="row">
 
-                    <button type="button" class="btn btn-default">
+                    <input type="checkbox" class="hidden"
+                        id="{{elementId}}-{{row.id}}"
+                        data-ng-click="toggleSelect($event)"
+                        data-ng-checked="isSelected">
+
+                    <label for="{{elementId}}-{{row.id}}">
                       <i class="flag n-{{('0000' + row.id).slice(-3)}}"></i>
                       {{row.name}}
-                    </button>
+                    </label>
+
                   </li>
                 </ul>
               </div></div>
