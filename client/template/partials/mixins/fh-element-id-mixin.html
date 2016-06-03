@@ -1,0 +1,63 @@
+<div class="row breadcrumbs">
+  <nav class="col-md-12">
+    <p class="sr-only">You are here:
+    <ol>
+      <li><a href="/#/">Home</a>
+      <li><a href="/#/mixins">Mixins</a>
+      <li>FhElementIdMixin
+    </ol>
+  </nav>
+</div>
+
+<div class="row">
+  <div class="col-md-8">
+
+    <h1>FhElementIdMixin</h1>
+
+    <p>Helps develop your own widget, provides consistent/uniform interface.
+
+    <p>Usually applied to form widgets.
+
+    <p>Let you use html attributes <code>data-fhp-element-id</code> and
+       <code>data-fhp-element-name</code> with the widget.
+
+    <p>The mixin doesn't modify scope.
+
+    <p>If you use <code>data-fhp-element-id</code> the generated id is going to
+       be exactly that, but if you use <code>data-fhp-element-name</code> it is
+       going to be random (with some numbers appended), if you didn't set any,
+       a random id will also be generated.
+
+    <p>The packaged widgets would usually assign the return value to
+       <code>$scope.elementId</code> and later use it as html attribute: 'id'.
+
+
+    <h2>Parameters</h2>
+
+    <ol>
+      <li>
+        <strong>attrs</strong>
+
+        <p>Angular controller's <code>$attrs</code>.
+
+      <li>
+        <strong>name</strong> (optional)
+        
+        <p>String of the first part of random generated id.
+    </ol>
+
+
+    <h2>Results</h2>
+
+    <ol>
+      <li>Return random generated id or the value of <code>data-fhp-element-id
+          </code>.
+    </ol>
+
+  </div>
+
+  <nav class="sidebar-navigation col-md-3 col-md-push-1">
+    <h2>See Also</h2>
+
+    <div data-ng-include="'/partials/mixins-see-also.html'"></div>
+</div>

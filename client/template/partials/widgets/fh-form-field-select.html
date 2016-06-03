@@ -12,16 +12,256 @@
 <div class="row">
   <div class="col-md-8">
 
-    <h2>FhFormFieldSelect</h2>
+    <h1>FhFormFieldSelect</h1>
 
     <p>Selection widget unrelated with table, but uses table definition anyway.
 
-    <p><a href="/demos/fh-form-field-select.html">See fhFormFieldSelect demo</a>
+
+    <h2>Angular Directive Parameters</h2>
+
+    <ul>
+      <li>
+        <strong>data-fh-form-field-select</strong> itself
+
+        <p>Expected value, string, the field's name.
+
+      <li>
+        <strong>data-fhp-name</strong>
+
+        <p>Expected value, string, the field's name, if you haven't set one
+           already with <code>data-fh-form-field-select</code>.
+
+      <li>
+        <strong>data-fhp-table</strong>
+
+        <p>Expected value, instance of <a href="/#/options">
+           FhTableDefinition</a>, if the widget was outside the scope of
+           <a href="/#/widgets/fh-table-row">FhTableRow</a> but that is very
+           unlikely.
+
+      <li>
+        <strong>data-fhp-template-url</strong>
+
+        <p>Expected value, string of url to partial html, with this you can
+           override the template html used by the widget.
+
+        <p>The widget uses
+           <a href="https://docs.angularjs.org/api/ng/service/$templateRequest">
+           Angular $templateRequest</a> on the value.
+
+      <li>
+        <strong>data-fhp-size</strong>
+
+        <p>Expected value, integer, the pager size with which to query
+           the server for items.
+
+        <p>You can also set this value when creating instance of
+           <a href="/#/options">FhTableDefinition</a>, the value set with this
+           html attribute will override that one.
+
+      <li>
+        <strong>data-fhp-order-by</strong>
+
+        <p>Expected value, string, the order by field-name with which to query
+           the server for items.
+
+        <p>You can also set this value when creating instance of
+           <a href="/#/options">FhTableDefinition</a>, the value set with this
+           html attribute will override that one.
+
+        <p>This method is inferior because you can only order by one field, in
+           <a href="/#/options">FhTableDefinition</a> you can use multiple
+           order-by fields.
+
+      <li>
+        <strong>data-fhp-order-dir</strong>
+
+        <p>Expected value, string ('asc' or 'desc'), the order-by's direction.
+
+      <li>
+        <strong>data-fhp-single-selection</strong>
+
+        <p>Expected value, string (empty, 'true', or 'false'), an option to
+           disable multiple-selection which is the default.
+
+      <li>
+        <strong>data-fhp-element-id</strong>
+
+        <p>Expected value, string, form elements usually have <code>id</code>
+           attribute set, for example to link &lt;label&gt; with the element
+           itself.
+
+        <p>If you don't set one, a random element-id will be assigned.
+
+      <li>
+        <strong>data-fhp-element-name</strong>
+
+        <p>Expected value, string, the alphabets part of random element-id, the
+           priority is lower than value set in <code>data-fhp-element-id</code>.
+
+        <p>Random numbers will be appended when the id was constructed, making
+           the id unique.
+
+      <li>
+        <strong>data-fhp-middlewares</strong>
+
+        <p>Expected value, comma separated list of services names.
+
+      <li>
+        <strong>data-fhe-*</strong>
+
+        <p>Custom event handler if you wanted to change this widget behaviour.
+
+    </ul>
+
+
+    <h2>Demo</h2>
+
+    <p><a href="/demos/fh-form-field-select.html">See FhFormFieldSelect demo</a>
+
+    <p>Notice that <a href="/#/widget-helpers/fhf-editable-field">
+       FhfEditableField</a> and <code>data-fhp-editable-fields</code> does the
+       same thing, and this widget will add its own field's name to the list.
+
+    <p>This demo uses <a href="/#/widgets/fh-infinite-scroll">
+       FhInfiniteScroll</a> so you can scroll down the list of country flags.
+       Notice that <code>data-fhp-init-callback</code> attribute is added to
+       element with <code>data-fh-infinite-scroll</code>, otherwise the infinite
+       scrolling wouldn't work.
+
+    <p>In this demo you'd see the usage of
+       <a href="/#/widget-helpers/fh-transcluded">FhTranscluded</a> and
+       <a href="/#/widget-helpers/fh-transclude-pane">FhTranscludePane</a>.
+
+    <p>You can freely set the content of the dropdown-popup in the html itself
+       with angular transclusion. In this particular widget the transclude-pane:
+       'popup' was built with
+       <a href="http://getbootstrap.com/javascript/#dropdowns">
+       Bootstraps dropdowns</a>.
+
+
+    <h2>Widgets Requirement</h2>
+
+    <ol>
+      <li><a href="/#/widgets/fh-table">FhTable</a>
+      <li><a href="/#/widgets/fh-form">FhForm</a>
+    </ol>
 
   </div>
 
   <nav class="sidebar-navigation col-md-3 col-md-push-1">
     <h2>See Also</h2>
+
     <div data-ng-include="'/partials/widgets-see-also.html'"></div>
+
+
+    <h2>Events Listened</h2>
+
+    <ul>
+      <li>
+        <h3>Action Events</h3>
+
+        <ul>
+          <li><a href="/#/events/add-multiple-values-filter">
+              addMultipleValuesFilter</a>
+              
+          <li><a href="/#/events/deselect-all-items">deselectAllItems</a>
+          <li><a href="/#/events/deselect-item">deselectItem</a>
+              (partial override)
+
+          <li><a href="/#/events/fetch-items">fetchItems</a>
+          <li><a href="/#/events/remove-multiple-values-filter">
+              removeMultipleValuesFilter</a>
+
+          <li><a href="/#/events/reset-items">resetItems</a>
+          <li><a href="/#/events/select-all-items">selectAllItems</a>
+          <li><a href="/#/events/select-item">selectItem</a>
+              (partial override)
+
+          <li><a href="/#/events/set-order">setOrder</a>
+          <li><a href="/#/events/set-page-offset">setPageOffset</a>
+          <li><a href="/#/events/set-page-size">setPageSize</a>
+          <li><a href="/#/events/set-single-value-filter">
+              setSingleValueFilter</a>
+        </ul>
+
+      <li>
+        <h3>Display Events</h3>
+
+        <ul>
+          <li><a href="/#/events/ajax-request-finished">ajaxRequestFinished</a>
+          <li><a href="/#/events/ajax-request-started">ajaxRequestStarted</a>
+          <li><a href="/#/events/item-added">itemAdded</a>
+          <li><a href="/#/events/item-data-updated">itemDataUpdated</a>
+          <li><a href="/#/events/item-deleted">itemDeleted</a>
+          <li><a href="/#/events/item-deselected">itemDeselected</a>
+          <li><a href="/#/events/item-selected">itemSelected</a>
+          <li><a href="/#/events/items-total-updated">itemsTotalUpdated</a>
+        </ul>
+    </ul>
+
+
+    <h2>Events Triggered</h2>
+
+    <ul>
+      <li>
+        <h3>Action Events</h3>
+
+        <ul>
+          <li><a href="/#/events/fetch-items">fetchItems</a>
+          <li><a href="/#/events/reset-items">resetItems</a>
+        </ul>
+
+      <li>
+        <h3>Display Events</h3>
+
+        <ul>
+          <li><a href="/#/events/ajax-request-finished">ajaxRequestFinished</a>
+          <li><a href="/#/events/ajax-request-started">ajaxRequestStarted</a>
+          <li><a href="/#/events/filter-updated">filterUpdated</a>
+          <li><a href="/#/events/item-data-updated">itemDataUpdated</a>
+          <li><a href="/#/events/item-deselected">itemDeselected</a>
+          <li><a href="/#/events/item-selected">itemSelected</a>
+          <li><a href="/#/events/items-total-updated">itemsTotalUpdated</a>
+          <li><a href="/#/events/items-updated">itemsUpdated</a>
+          <li><a href="/#/events/order-updated">orderUpdated</a>
+          <li><a href="/#/events/page-offset-updated">pageOffsetUpdated</a>
+          <li><a href="/#/events/page-size-updated">pageSizeUpdated</a>
+        </ul>
+    </ul>
+
+
+    <h2>Parent Events Listened</h2>
+
+    <ul>
+      <li>
+        <h3>Display Events</h3>
+
+        <ul>
+          <li><a href="/#/events/draft-updated">draftUpdated</a>
+        </ul>
+    </ul>
+
+
+    <h2>Parent Events Triggered</h2>
+
+    <ul>
+      <li>
+        <h3>Action Events</h3>
+
+        <ul>
+          <li><a href="/#/events/draft-set-field">draftSetField</a>
+          <li><a href="/#/events/draft-unset-field">draftUnsetField</a>
+        </ul>
+
+      <li>
+        <h3>Display Events</h3>
+
+        <ul>
+          <li><a href="/#/events/ajax-request-finished">ajaxRequestFinished</a>
+          <li><a href="/#/events/ajax-request-started">ajaxRequestStarted</a>
+        </ul>
+    </ul>
+
   </nav>
 </div>

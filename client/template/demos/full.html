@@ -232,7 +232,7 @@
                   data-fhf-editable-field="body"></textarea>
 
             <td data-ng-if="!isEditing">
-              <i class="flag n-{{('0000' + row.country).slice(-3)}}"
+              <i class="flag n-{{('0000' + row.country.id).slice(-3)}}"
                   data-ng-show="row.country"></i>
 
             <td data-ng-if="isEditing"

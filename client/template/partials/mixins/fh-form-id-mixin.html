@@ -1,0 +1,94 @@
+<div class="row breadcrumbs">
+  <nav class="col-md-12">
+    <p class="sr-only">You are here:
+    <ol>
+      <li><a href="/#/">Home</a>
+      <li><a href="/#/mixins">Mixins</a>
+      <li>FhFormIdMixin
+    </ol>
+  </nav>
+</div>
+
+<div class="row">
+  <div class="col-md-8">
+
+    <h1>FhFormIdMixin</h1>
+
+    <p>Helps develop your own widget, provides consistent/uniform interface.
+
+    <p>The reason this mixin were made was because of form cache
+       (<a href="/#/middlewares/fh-form-session-storage">FhFormSessionStorage
+       </a>).
+
+    <p>Some forms are dynamically generated (<a href="/#/widgets/fh-table-row">
+       FhTableRow</a>), so we need predictable dynamically generated id, and use
+       this id to retrive and store form cache.
+
+    <p>That doesn't stop this mixin from being used for other things.
+
+    <p>The side effect is the complicated draft (form data being edited) related
+       events that checks for form-id.
+
+    <p>Let you use html attributes <code>data-fhp-form-id</code> and <code>
+       data-fhp-form-name</code> with the widget.
+
+    <p>If you use <code>data-fhp-form-id</code> the generated id is going to be
+       exactly that.
+
+    <p>If you use <code>data-fhp-form-name</code> the generated id is going to
+       be that appended with form-data's identifier-fields, usually their 'id'
+       property.
+       
+    <p>If you didn't supply form-data as argument it's going to be random, don't
+       attach the form cache middleware.
+
+
+    <h2>Parameters</h2>
+
+    <ol>
+      <li>
+        <strong>scope</strong>
+        
+        <p>Angular controller's <code>$scope</code>.
+
+      <li>
+        <strong>attrs</strong>
+
+        <p>Angular controller's <code>$attrs</code>.
+
+      <li>
+        <strong>item</strong>
+
+        <p>Form data, object bound to the form, a draft is a copy of this object
+           with its fields modified by the form's input elements.<br>
+           Used to generate dynamic unique id.
+
+      <li>
+        <strong>create</strong>
+
+        <p>Boolean, generate new form-id or reuse existing one in
+           <code>$scope.formId</code>.
+
+      <li>
+        <strong>name</strong>
+
+        <p>String, if not set will default to 'fh-form-'.
+
+    </ol>
+
+
+    <h2>Results</h2>
+
+    <ol>
+      <li>Return the generated unique id.
+      <li>Modify <code>$scope</code>, store unique id in
+          <code>$scope.formId</code>.
+    </ol>
+
+  </div>
+
+  <nav class="sidebar-navigation col-md-3 col-md-push-1">
+    <h2>See Also</h2>
+
+    <div data-ng-include="'/partials/mixins-see-also.html'"></div>
+</div>

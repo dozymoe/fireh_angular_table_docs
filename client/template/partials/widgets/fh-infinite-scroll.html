@@ -12,7 +12,7 @@
 <div class="row">
   <div class="col-md-8">
 
-    <h2>FhInfiniteScroll</h2>
+    <h1>FhInfiniteScroll</h1>
 
     <p>Good old infinite scroll, one direction, down only, will load all items
        in html, not recommended for dangerously large number of items.
@@ -26,12 +26,54 @@
        <code>overflow-y:scroll</code>, the infinite-scroll will trigger as you
        go down the whole page.
 
-    <p><a href="/demos/fh-infinite-scroll.html">See fhInfiniteScroll demo</a>
+
+    <h2>Angular Directive Parameters</h2>
+
+    <ul>
+      <li>
+        <strong>data-fh-infinite-scroll</strong> itself
+
+        <p>Expected value, instance of <a href="/#/options">
+           FhTableDefinition</a>.
+
+      <li>
+        <strong>data-fhp-table</strong>
+
+        <p>Expected value, instance of <a href="/#/options">
+           FhTableDefinition</a>, if you haven't set one already with <code>
+           data-fh-form</code>.
+    </ul>
+
+
+    <h2>Demo</h2>
+
+    <p><a href="/demos/fh-infinite-scroll.html">See FhInfiniteScroll demo</a>
+
+
+    <h2>Widgets Requirement</h2>
+
+    <p>Widgets that implement
+       <a href="/#/mixins/fh-table-list-resource-controller-mixin">
+       FhTableListResourceControllerMixin</a>.
 
   </div>
 
   <nav class="sidebar-navigation col-md-3 col-md-push-1">
     <h2>See Also</h2>
+
     <div data-ng-include="'/partials/widgets-see-also.html'"></div>
+
+
+    <h2>Events Listened</h2>
+
+    <ul>
+      <li>
+        <h3>Display Events</h3>
+
+        <ul>
+          <li><a href="/#/events/items-update-failed">itemsUpdateFailed</a>
+          <li><a href="/#/events/items-updated">itemsUpdated</a>
+        </ul>
+    </ul>
   </nav>
 </div>

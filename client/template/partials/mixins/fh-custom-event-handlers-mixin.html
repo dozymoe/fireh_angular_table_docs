@@ -1,0 +1,72 @@
+<div class="row breadcrumbs">
+  <nav class="col-md-12">
+    <p class="sr-only">You are here:
+    <ol>
+      <li><a href="/#/">Home</a>
+      <li><a href="/#/mixins">Mixins</a>
+      <li>FhCustomEventHandlersMixin
+    </ol>
+  </nav>
+</div>
+
+<div class="row">
+  <div class="col-md-8">
+
+    <h1>FhCustomEventHandlersMixin</h1>
+
+    <p>Helps develop your own widget, provides consistent/uniform interface.
+
+    <p>Event-hub is the core of this framework. While you would normally
+       interact with the widget by listening or triggering events, there is a
+       method of overloaded event listener that can modify behaviour of the
+       widgets themselves.
+
+    <p>With "event handlers" you could gain access to the scope and instance of
+       <a href="/#/options">FhTableDefinition</a> that the widget were using.
+
+    <p>While the widget is processing listened events, the mixin will look at
+       the html attribute <code>data-fhe-</code> + event's name. If existed will
+       run the scope function first, before calling the widget's original event
+       listener.
+
+    <p>If the attribute was not found, will look at instance of
+       <a href="/#/options">FhTableDefinition</a> for
+       <code>eventHandlers</code>.
+
+    <p>It's better if you used the html attribute option, it'd be activated only
+       for the intended widget.
+
+
+    <h2>Parameters</h2>
+
+    <ol>
+      <li>
+        <strong>eventHandlers</strong>
+        
+        <p>Object of event's name and array of event handler functions.
+
+      <li>
+        <strong>attrs</strong>
+
+        <p>Angular controller's <code>$attrs</code>.
+
+      <li>
+        <strong>fhtable</strong>
+
+        <p>Instance of <a href="/#/options">FhTableDefinition</a>.
+    </ol>
+
+
+    <h2>Results</h2>
+
+    <ol>
+      <li>Modify inplace the first argument (eventHandlers), add more callbacks.
+    </ol>
+
+  </div>
+
+  <nav class="sidebar-navigation col-md-3 col-md-push-1">
+    <h2>See Also</h2>
+
+    <div data-ng-include="'/partials/mixins-see-also.html'"></div>
+</div>

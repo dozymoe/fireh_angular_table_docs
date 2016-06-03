@@ -31,6 +31,76 @@ app.config(['$routeProvider', function($router) {
             }
         })
 
+        .when('/mixins/fh-custom-event-handlers-mixin', {
+            templateUrl: '/partials/mixins/fh-custom-event-handlers-mixin.html',
+            controller: function() {
+                document.title = 'FhCustomEventHandlersMixin | ' +
+                        'FirehAngularTable';
+            }
+        })
+
+        .when('/mixins/fh-element-id-mixin', {
+            templateUrl: '/partials/mixins/fh-element-id-mixin.html',
+
+            controller: function() {
+                document.title = 'FhElementIdMixin | FirehAngularTable';
+            }
+        })
+
+        .when('/mixins/fh-event-handlers-mixin', {
+            templateUrl: '/partials/mixins/fh-event-handlers-mixin.html',
+
+            controller: function() {
+                document.title = 'FhEventHandlersMixin | FirehAngularTable';
+            }
+        })
+
+        .when('/mixins/fh-form-id-mixin', {
+            templateUrl: '/partials/mixins/fh-form-id-mixin.html',
+            controller: function() {
+                document.title = 'FhFormIdMixin | FirehAngularTable';
+            }
+        })
+
+        .when('/mixins/fh-middlewares-mixin', {
+            templateUrl: '/partials/mixins/fh-middlewares-mixin.html',
+            controller: function() {
+                document.title = 'FhMiddlewaresMixin | FirehAngularTable';
+            }
+        })
+
+        .when('/mixins/fh-selected-items-mixin', {
+            templateUrl: '/partials/mixins/fh-selected-items-mixin.html',
+            controller: function() {
+                document.title = 'FhSelectedItemsMixin | FirehAngularTable';
+            }
+        })
+
+        .when('/mixins/fh-table-definition-mixin', {
+            templateUrl: '/partials/mixins/fh-table-definition-mixin.html',
+            controller: function() {
+                document.title = 'FhTableDefinitionMixin | FirehAngularTable';
+            }
+        })
+
+        .when('/mixins/fh-table-list-resource-controller-mixin', {
+            templateUrl: '/partials/mixins/fh-table-list-resource-controller-mixin.html',
+
+            controller: function() {
+                document.title = 'FhTableListResourceControllerMixin | ' +
+                        'FirehAngularTable';
+            }
+        })
+
+        .when('/mixins/fh-transclude-child-elements-mixin', {
+            templateUrl: '/partials/mixins/fh-transclude-child-elements-mixin.html',
+
+            controller: function() {
+                document.title = 'FhTranscludeChildElementsMixin | ' +
+                        'FirehAngularTable';
+            }
+        })
+
         //// widgets
 
         .when('/widgets', {
@@ -129,10 +199,25 @@ app.config(['$routeProvider', function($router) {
 
         //// widget-helpers
 
+        .when('/widget-helpers/fhf-editable-field', {
+            templateUrl: '/partials/widget-helpers/fhf-editable-field.html',
+            controller: function() {
+                document.title = 'FhfEditableField widget | FirehAngularTable';
+            }
+        })
+
         .when('/widget-helpers/fh-transcluded', {
             templateUrl: '/partials/widget-helpers/fh-transcluded.html',
             controller: function() {
                 document.title = 'FhTranscluded attribute | FirehAngularTable';
+            }
+        })
+
+        .when('/widget-helpers/fh-transclude-pane', {
+            templateUrl: '/partials/widget-helpers/fh-transclude-pane.html',
+            controller: function() {
+                document.title = 'FhTranscludePane attribute | ' +
+                        'FirehAngularTable';
             }
         })
 

@@ -1,0 +1,59 @@
+<div class="row breadcrumbs">
+  <nav class="col-md-12">
+    <p class="sr-only">You are here:
+    <ol>
+      <li><a href="/#/">Home</a>
+      <li><a href="/#/mixins">Mixins</a>
+      <li>FhTableDefinitionMixin
+    </ol>
+  </nav>
+</div>
+
+<div class="row">
+  <div class="col-md-8">
+
+    <h1>FhTableDefinitionMixin</h1>
+
+    <p>Help develop your own widget, provides consistent/uniform interface.
+
+    <p>Let you use html attributes <code>data-fhp-table</code>, which value is
+       instance of <a href="/#/options">FhTableDefinition</a>.
+
+    <p>It is possible to use custom html attribute instead of data-fhp-table.
+
+
+    <h2>Parameters</h2>
+
+    <ol>
+      <li>
+        <strong>scope</strong>
+        
+        <p>Angular controller's <code>$scope</code>.
+
+      <li>
+        <strong>attrs</strong>
+
+        <p>Angular controller's <code>$attrs</code>.
+
+      <li>
+        <strong>alternateAttrField</strong> (optional)
+
+        <p>String, alternative html attribute name, the default is
+           <code>data-fhp-table</code>.
+
+    </ol>
+
+
+    <h2>Results</h2>
+
+    <ol>
+      <li>Modify scope, create variable <code>$scope.fhtable</code>.
+    </ol>
+
+  </div>
+
+  <nav class="sidebar-navigation col-md-3 col-md-push-1">
+    <h2>See Also</h2>
+
+    <div data-ng-include="'/partials/mixins-see-also.html'"></div>
+</div>
