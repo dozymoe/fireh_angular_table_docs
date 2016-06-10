@@ -358,6 +358,13 @@ app.config(['$routeProvider', function($router) {
             }
         })
 
+        .when('/events/item-add-failed', {
+            templateUrl: '/partials/events/item-add-failed.html',
+            controller: function() {
+                document.title = 'itemAddFailed event | FirehAngularTable';
+            }
+        })
+
         .when('/events/item-data-updated', {
             templateUrl: '/partials/events/item-data-updated.html',
             controller: function() {
@@ -365,10 +372,25 @@ app.config(['$routeProvider', function($router) {
             }
         })
 
+        .when('/events/item-data-update-failed', {
+            templateUrl: '/partials/events/item-data-update-failed.html',
+            controller: function() {
+                document.title = 'itemDataUpdateFailed event | ' +
+                        'FirehAngularTable';
+            }
+        })
+
         .when('/events/item-deleted', {
             templateUrl: '/partials/events/item-deleted.html',
             controller: function() {
                 document.title = 'itemDeleted event | FirehAngularTable';
+            }
+        })
+
+        .when('/events/item-delete-failed', {
+            templateUrl: '/partials/events/item-delete-failed.html',
+            controller: function() {
+                document.title = 'itemDeleteFailed event | FirehAngularTable';
             }
         })
 

@@ -4,7 +4,7 @@
     <ol>
       <li><a href="/#/">Home</a>
       <li><a href="/#/events">Events</a>
-      <li>addEditableField
+      <li>batchAction
     </ol>
   </nav>
 </div>
@@ -12,17 +12,22 @@
 <div class="row">
   <div class="col-md-8">
 
-    <h1>addEditableField</h1>
+    <h1>deleteItem</h1>
 
     <p>This is an action event, it is used to prompt other widgets to perform
        actions, if they succeded then passive form of the event's name should be
        triggered to notify this widget that it was a success or a failure.
 
-    <p>Widgets that implemented draft, <a href="/#/widgets/fh-form">FhForm</a>
-       and <a href="/#/widgets/fh-table-row">FhTableRow</a> (in editable
-       mode), white-listed the draft fields that can be submitted.
+    <p>Delete user object.
 
-    <p>Allow form input widgets to set editable fields of the form's draft.
+    <p>You are responsible of implementing the event listener, perform the
+       necessary ajax call to remove the object, then trigger
+       <a href="/#/events/item-deleted">itemDeleted</a> if successful or
+       <a href="/#/events/item-delete-failed">itemDeleteFailed</a> if failed.
+
+    <p>If you used ajax, you should trigger
+       <a href="/#/events/ajax-request-started">ajaxRequestStarted</a> and
+       <a href="/#/events/ajax-request-finished">ajaxRequestFinished</a>.
 
 
     <h2>Parameters</h2>
@@ -35,7 +40,7 @@
           <a href="https://docs.angularjs.org/api/ng/type/$rootScope.Scope#$on">
           event object</a>.
 
-      <li><strong>fieldName</strong>
+      <li><strong>item</strong>
 
       <li>
         <strong>options</strong>
@@ -50,18 +55,21 @@
     </ol>
 
 
+    <h2>Related Events</h2>
+
+    <ul>
+      <li><a href="/#/events/ajax-request-finished">ajaxRequestFinished</a>
+      <li><a href="/#/events/ajax-request-started">ajaxRequestStarted</a>
+      <li><a href="/#/events/item-deleted">itemDeleted</a>
+      <li><a href="/#/events/item-delete-failed">itemDeleteFailed</a>
+    </ul>
+
+
     <h2>Related Widgets</h2>
 
     <ul>
       <li><a href="/#/widgets/fh-form">FhForm</a>
       <li><a href="/#/widgets/fh-table-row">FhTableRow</a>
-    </ul>
-
-
-    <h2>Related Widget Helpers</h2>
-
-    <ul>
-      <li><a href="/#/widget-helpers/fhf-editable-field">FhfEditableField</a>
     </ul>
 
   </div>
