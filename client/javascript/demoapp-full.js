@@ -62,6 +62,12 @@ app.controller('MainCtrl', [
 
     $scope.isCreatingNote = false;
 
+    function getEventOptions() {
+        return {
+            formId: 'createNoteForm'
+        };
+    }
+
     //// CRUD
 
     function itemsGetter(payload) {
@@ -136,6 +142,10 @@ app.controller('MainCtrl', [
             },
             function addNoteFailed(error) {
                 console.log(error);
+
+                fhtable.trigger('itemAddFailed', error.status, error.data,
+                        options);
+
                 fhtable.trigger('ajaxRequestFinished');
             }
         );
@@ -154,6 +164,10 @@ app.controller('MainCtrl', [
             },
             function deleteNoteFailed(error) {
                 console.log(error);
+
+                fhtable.trigger('itemDeleteFailed', error.status, error.data,
+                        options);
+
                 fhtable.trigger('ajaxRequestFinished');
             }
         );
@@ -188,6 +202,10 @@ app.controller('MainCtrl', [
             },
             function editNoteFailed(error) {
                 console.log(error);
+
+                fhtable.trigger('itemDataUpdateFailed', error.status,
+                        error.data, draft, item, options);
+
                 fhtable.trigger('ajaxRequestFinished');
             }
         );
