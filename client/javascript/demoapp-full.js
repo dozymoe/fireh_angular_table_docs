@@ -144,7 +144,7 @@ app.controller('MainCtrl', [
                 console.log(error);
 
                 fhtable.trigger('itemAddFailed', error.status, error.data,
-                        options);
+                        draft, item, options);
 
                 fhtable.trigger('ajaxRequestFinished');
             }
@@ -166,7 +166,7 @@ app.controller('MainCtrl', [
                 console.log(error);
 
                 fhtable.trigger('itemDeleteFailed', error.status, error.data,
-                        options);
+                        item, options);
 
                 fhtable.trigger('ajaxRequestFinished');
             }
